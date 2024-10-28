@@ -1,0 +1,15 @@
+underlay_lb_ip: "10.3.1.1"
+underlay_lb_ip_mask: 32
+overlay_ident_tun_lb_ip: "20.3.1.1"
+overlay_ident_tun_lb_ip_mask: 32
+overlay_unique_lb_ip: "30.3.1.1"
+overlay_unique_lb_ip_mask: 32
+
+# Must be underlay_lb_ip of peer
+peer_underlay_lb_ip: "10.81.3.2"
+# Must be same as system_mac of peer
+system_mac: "20:13:23:33:43:53"
+
+border_leaf_asn: 65010
+# Shall be same as peer border leaf within the same Pod
+tenant_asn: 65010

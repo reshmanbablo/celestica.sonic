@@ -1,0 +1,222 @@
+---
+- name: Playbook to configure LEAF nodes
+  hosts: leaf_group
+  gather_facts: no
+ 
+  tasks:
+
+    - name: Configure Loopback IPs (underlay and overlay_ident)
+      celestica.sonic.l3_interface:
+        config:
+          interface:
+            - name: "{{loopback0_interface}}"
+              ipv4: 
+                addresses:
+                  - address: "{{underlay_lb_ip}}/{{underlay_lb_ip_mask}}"
+            - name: "{{loopback1_interface}}"
+              ipv4: 
+                addresses:
+                  - address: "{{overlay_ident_lb_ip}}/{{overlay_ident_lb_ip_mask}}"
+       
+    - name: Configure link_local_ipv6
+      celestica.sonic.l3_interface:
+        config:
+          interface:
+            - name: "{{item}}"                 
+              ipv6:
+                link-local-only: true
+      with_items: "{{spine_going_interfaces}}"
+
+    - name: Configure BGP router-id, bestpath, ebgp-requires-policy
+      celestica.sonic.bgp:
+        config:
+          bgp:
+            - asn: "{{leaf_asn}}"
+              router-id: "{{overlay_ident_lb_ip}}"
+              ebgp-requires-policy: false
+              bestpath:
+                as-path:
+                  multipath-relax: true
+
+    - name: Configure BGP SPINE peer-group
+      celestica.sonic.bgp_neighbor:
+        config:
+          bgp:
+            - asn: "{{leaf_asn}}"
+              neighbor:
+                - id: "{{spine_neighbor_tag}}"
+                  peer-group-enable: true
+
+    - name: Configure BGP SPINE remote-as
+      celestica.sonic.bgp_neighbor:
+        config:
+          bgp:
+            - asn: "{{leaf_asn}}"
+              neighbor:
+                - id: "{{spine_neighbor_tag}}"
+                  remote-as: external
+
+    - name: Configure Spine_going_interfaces
+      celestica.sonic.bgp_neighbor:
+        config:
+          bgp:
+            - asn: "{{leaf_asn}}"
+              neighbor:                  
+                - id: "{{item}}"
+                  peer-group: "{{spine_neighbor_tag}}" 
+                  interface: true
+                                  
+      with_items: "{{spine_going_interfaces}}"
+
+    - name: Configure BGP address family (redistribute connected & advertise-all-vni)
+      celestica.sonic.bgp_af:
+        config:
+          bgp:
+            - asn: "{{leaf_asn}}"
+              address-family:
+                - afi: ipv4
+                  safi: unicast
+                  redistribute:
+                    - protocol: connected
+                - afi: l2vpn
+                  safi: evpn
+                  advertise-all-vni: true        
+
+    - name: Configure BGP address family neighbor (neighbor SPINE activate)
+      celestica.sonic.bgp_af_neighbor:
+        config:
+          bgp:
+            - asn: "{{leaf_asn}}"
+              address-family:
+                - afi: l2vpn
+                  safi: evpn
+                  neighbor:
+                    - id: "{{spine_neighbor_tag}}"
+                      activate: true
+
+    - name: Configure Tenant VRF & VNI
+      celestica.sonic.vrf:
+        config:
+          vrf:
+            - name: "{{tenant_vrf}}"
+              vni: "{{vrf_vni}}"
+
+    - name: Configure L2 Tenant Vlan - VRF
+      celestica.sonic.vrf:
+        config:
+          interface:
+            - name: "Vlan{{item.key}}"
+              vrf: "{{tenant_vrf}}"
+      loop: "{{ lookup('ansible.builtin.dict', l2_tenant_vlans, wantlist=True) }}"
+
+    - name: Configure L3 Tenant Vlan - VRF
+      celestica.sonic.vrf:
+        config:
+          interface:
+            - name: "Vlan{{item.key}}"
+              vrf: "{{tenant_vrf}}"
+      loop: "{{ lookup('ansible.builtin.dict', l3_tenant_vlans, wantlist=True) }}"
+
+    - name: Configure Tenant Vlan - L3 Interface
+      celestica.sonic.l3_interface:
+        config:
+          interface:
+            - name: "Vlan{{item.key}}"
+              ipv4:
+                addresses:
+                  - address: "{{item.value.interface_ip}}"
+      loop: "{{ lookup('ansible.builtin.dict', l3_tenant_vlans, wantlist=True) }}"
+
+    - name: Configure SAG MAC address
+      celestica.sonic.sag:
+        config:
+          mac:
+            - address: "{{sag_mac}}"
+
+    - name: Configure L3 Tenant Vlan - SAG IP
+      celestica.sonic.sag:
+        config:
+          vlan:
+            - name: "Vlan{{item.key}}"
+              sag-ip: "{{item.value.sag_ip}}"
+      loop: "{{ lookup('ansible.builtin.dict', l3_tenant_vlans, wantlist=True) }}"
+
+    - name: Configure access VLAN members
+      celestica.sonic.l2_interface:
+        config:
+          interface:
+            - name: "{{ item.key }}"
+              access:
+                vlan: "{{item.value.access_vlan}}"
+      loop: "{{ lookup('ansible.builtin.dict', access_vlan_members, wantlist=True) }}"
+
+    - name: Configure trunk VLAN members
+      celestica.sonic.l2_interface:
+        config:
+          interface:
+            - name: "{{ item.key }}"
+              trunk: "{{item.value.trunk_vlans}}"
+      loop: "{{ lookup('ansible.builtin.dict', trunk_vlan_members, wantlist=True) }}"
+
+    - name: Merge MCLAG peer_link Configuration
+      celestica.sonic.portchannel:
+        config:
+          interface:
+            - name: "{{peer_link}}"
+
+    - name: Configure MCLAG peer-link members
+      celestica.sonic.interface:
+        config:
+          interface:
+            - name: "{{item.key}}"
+              channel-group: "{{item.value.channel_group}}"
+      loop: "{{ lookup('ansible.builtin.dict', lag_members) }}"
+
+    - name: Configure MCLAG Domain (peerlink, peer-ip, src-ip, sys-mac)
+      celestica.sonic.mclag:
+        config:
+          domain:
+            - id: "{{mclag_domain_id}}"
+              peer-ip: "{{peer_underlay_lb_ip}}"
+              peer-link: "{{peer_link}}"
+              source-ip: "{{underlay_lb_ip}}"
+              system-mac: "{{system_mac}}"
+
+    - name: Configure Tunnel Vlan
+      register: result
+      celestica.sonic.vlan:
+        config:
+          interface:
+            - name: "Vlan{{tunnel_vlan}}"
+
+    - name: Configure VxLAN (vxlan-profile, interface [src-ip, vtep-mac] , Tunnel_Vlan - VRF_VNI )
+      celestica.sonic.vxlan:
+        config:
+          vxlan-profile: true
+          interface:
+            - name: "vtep{{vtep_number}}"
+              source-ip: "{{overlay_ident_lb_ip}}"
+              vtep-mac: "{{peer_switch_physical_mac}}" 
+              vni:
+                - vni-id: "{{vrf_vni}}"
+                  vlan-id: "{{tunnel_vlan}}"
+
+    - name: Configure VxLAN L2 Tenant Vlan (Trunk) - VNI
+      celestica.sonic.vxlan:
+        config:
+          interface:
+            - name: "vtep{{vtep_number}}"
+              vni:
+                - vni-id: "{{item.value.vni}}"
+                  vlan-id: "{{item.key}}"
+      loop: "{{ lookup('ansible.builtin.dict', l2_tenant_vlans, wantlist=True) }}"
+
+    - name: Configure VxLAN L3 Tenant Vlan - VNI
+      celestica.sonic.vxlan:
+        config:
+          interface:
+            - name: "vtep{{vtep_number}}"
+              vni:
+                - vni-id: "{{item.value.vni}}"
+                  vlan-id: "{{item.key}}"
+      loop: "{{ lookup('ansible.builtin.dict', l3_tenant_vlans, wantlist=True) }}"

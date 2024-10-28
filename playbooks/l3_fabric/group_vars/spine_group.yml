@@ -1,0 +1,14 @@
+loopback0_interface: "Loopback0"
+
+border_leaf_neighbor_tag: "BORDER_LEAF"
+leaf_neighbor_tag: "LEAF"
+
+border_leaf_going_interfaces:
+- "Ethernet120"
+- "Ethernet124"
+
+leaf_going_interfaces:
+- "Ethernet0"
+- "Ethernet4"
+- "Ethernet8"
+- "Ethernet12"

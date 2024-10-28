@@ -1,0 +1,67 @@
+---
+- name: Playbook to provision common configurations on all nodes
+  hosts: all
+  gather_facts: no
+  vars:
+    ntp_vrf_status: false
+ 
+  tasks:
+
+    - name: Gather the VRF facts
+      celestica.sonic.facts:
+        gather_network_resources:
+          - vrf
+
+    - name: Check for VRF "{{ntp_vrf}}"
+      set_fact:
+        ntp_vrf_status: true
+      loop: "{{ ansible_network_resources.vrf.config.interface }}"
+      when: item.name == ntp_source_interface and item.get('vrf') == ntp_vrf
+
+    - name: Assert VRF "{{ntp_vrf}}"
+      assert:
+        that: ntp_vrf_status
+        msg: "VRF {{ntp_vrf}} not found."
+
+    - name: Configure NTP source-interface & vrf
+      celestica.sonic.ntp:
+        config:
+          global:
+            source-interface: "{{ntp_source_interface}}"
+            vrf: "{{ntp_vrf}}"
+
+    - name: Configure NTP servers
+      celestica.sonic.ntp:
+        config:
+          server:
+            - ip-addr: "{{item}}"
+      with_items: "{{ntp_server_ips}}"
+
+    - name: Configure TACACS host with encrypted-passkey
+      celestica.sonic.tacacs:
+        config:
+          server:
+            - ip-addr: "{{tacacs_server_ip}}"
+              encrypted-passkey: "{{encrypted_passkey}}"
+              vrf: "{{tacacs_vrf}}"
+
+    - name: Configure SNMP community
+      celestica.sonic.snmp:
+        config:
+          community: 
+            - name: "{{item}}"
+              access: "{{snmp_community_access}}"
+      with_items: "{{snmp_community}}"              
+
+    - name: Configure SNMPv3 user
+      celestica.sonic.snmp:
+        config:          
+          user:
+            - name: "{{item.key}}"
+              user-type: "{{snmpv3_user_type}}"
+              auth-algorithm: "{{snmpv3_auth_algorithm}}"
+              encrypted-auth-password: "{{item.value.auth_password}}"
+              encrypt-algorithm: "{{snmpv3_encrypt_algorithm}}"
+              encrypted-encrypt-password: "{{item.value.encrypt_password}}"
+              access: "{{snmpv3_access}}"
+      loop: "{{ lookup('ansible.builtin.dict', snmpv3_users) }}"

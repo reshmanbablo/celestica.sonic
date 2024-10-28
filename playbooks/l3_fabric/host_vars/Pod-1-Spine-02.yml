@@ -1,0 +1,5 @@
+underlay_lb_ip: "10.51.2.6"
+underlay_lb_ip_mask: 32
+
+# Shall be same as peer spine within the same Pod
+spine_asn: 65011

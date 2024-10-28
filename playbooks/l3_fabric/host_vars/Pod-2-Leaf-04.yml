@@ -1,0 +1,33 @@
+underlay_lb_ip: "10.61.2.8"
+underlay_lb_ip_mask: 32
+overlay_ident_lb_ip: "10.61.2.134"
+overlay_ident_lb_ip_mask: 32
+
+leaf_asn: 65008
+
+# Must be same as underlay_lb_ip of peer
+peer_underlay_lb_ip: "10.61.2.7"
+# Must be same as system_mac of peer
+system_mac: "00:17:27:37:47:57"
+
+# Physical MAC of peer
+peer_switch_physical_mac: "00:00:00:00:AB:03"
+
+l2_tenant_vlans:
+  20:
+    vni: 20
+
+l3_tenant_vlans:
+  10:
+    interface_ip: "10.61.32.254/24"
+    sag_ip: "10.61.32.1"
+    vni: 10
+
+trunk_vlan_members:
+  PortChannel10:
+    trunk_vlans:
+      - vlan: 10
+
+access_vlan_members:
+  PortChannel20:
+    access_vlan: 20

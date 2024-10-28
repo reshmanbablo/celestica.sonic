@@ -1,0 +1,5 @@
+---
+- import_playbook: common.yml
+- import_playbook: leaf.yml
+- import_playbook: spine.yml
+- import_playbook: border_leaf.yml

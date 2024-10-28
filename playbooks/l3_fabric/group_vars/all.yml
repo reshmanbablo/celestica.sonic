@@ -1,0 +1,32 @@
+ansible_user: admin
+ansible_connection: ansible.netcommon.network_cli
+ansible_network_os: celestica.sonic.sonic
+
+tacacs_server_ip: "10.208.32.30"
+encrypted_passkey: "tacacs_password"
+tacacs_vrf: "mgmt"
+
+ntp_source_interface: "Management0"
+ntp_vrf: "mgmt"
+
+ntp_server_ips:
+- "10.1.1.1"
+- "10.1.1.2"
+
+snmp_community:
+- "chennai-hps1-ro"
+- "chennai-hps2-ro"
+snmp_community_access: read-only
+
+snmpv3_user_type: Priv
+snmpv3_auth_algorithm: md5
+snmpv3_encrypt_algorithm: des
+snmpv3_access: read-only
+
+snmpv3_users:
+  user1:
+    auth_password: "md5authpassword1"
+    encrypt_password: "desencryptpassword1"
+  user2:
+    auth_password: "md5authpassword2"
+    encrypt_password: "desencryptpassword2"

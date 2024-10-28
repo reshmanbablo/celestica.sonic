@@ -1,0 +1,40 @@
+all:
+  children:
+    leaf_group:
+      hosts:
+        Pod-1-Leaf-01:
+          ansible_host: 10.208.80.21
+        Pod-1-Leaf-02:
+          ansible_host: 10.208.80.22
+        Pod-1-Leaf-03:
+          ansible_host: 10.208.80.23
+        Pod-1-Leaf-04:
+          ansible_host: 10.208.80.24
+        Pod-2-Leaf-01:
+          ansible_host: 10.208.80.25
+        Pod-2-Leaf-02:
+          ansible_host: 10.208.80.26
+        Pod-2-Leaf-03:
+          ansible_host: 10.208.80.27
+        Pod-2-Leaf-04:
+          ansible_host: 10.208.80.28
+    spine_group:
+      hosts:
+        Pod-1-Spine-01:
+          ansible_host: 10.208.80.31
+        Pod-1-Spine-02:
+          ansible_host: 10.208.80.32
+        Pod-2-Spine-01:
+          ansible_host: 10.208.80.33
+        Pod-2-Spine-02:
+          ansible_host: 10.208.80.34
+    border_leaf_group:
+      hosts:
+        Pod-1-Border-Leaf-01:
+          ansible_host: 10.208.80.41
+        Pod-1-Border-Leaf-02:
+          ansible_host: 10.208.80.42
+        Pod-2-Border-Leaf-01:
+          ansible_host: 10.208.80.43
+        Pod-2-Border-Leaf-02:
+          ansible_host: 10.208.80.44

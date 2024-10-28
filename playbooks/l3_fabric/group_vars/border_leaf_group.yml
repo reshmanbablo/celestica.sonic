@@ -1,0 +1,37 @@
+loopback0_interface: "Loopback0"
+loopback1_interface: "Loopback1"
+loopback2_interface: "Loopback2"
+
+tenant_vrf: "VrfTenant"
+vrf_vni: 1
+tunnel_vlan: 10
+
+other_site_border_leaf_interface: "Ethernet0"
+
+same_site_border_leaf_interface: "Ethernet68"
+
+spine_interfaces:
+- "Ethernet48"
+- "Ethernet52"
+
+vtep_number: 1
+
+sdwan_ip_address: "70.1.1.1"
+sdwan_asn: 65010
+
+firewall_vlans:
+  101:
+    vlan_vni: 1
+    trunk_interface: "Ethernet11"
+  102:
+    vlan_vni: 2
+    trunk_interface: "Ethernet11"
+
+mclag_domain_id: 1
+peer_link: PortChannel10
+
+lag_members:
+  Ethernet72:
+    channel_group: 10
+  Ethernet76:
+    channel_group: 10

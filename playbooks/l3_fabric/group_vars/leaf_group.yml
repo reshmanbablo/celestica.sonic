@@ -1,0 +1,24 @@
+loopback0_interface: "Loopback0"
+loopback1_interface: "Loopback1"
+
+spine_neighbor_tag: "SPINE"
+spine_going_interfaces:
+- "Ethernet48"
+- "Ethernet52"
+
+tenant_vrf: "VrfTenant"
+vrf_vni: 1
+
+sag_mac: "11:22:33:44:55:66"
+
+mclag_domain_id: 1
+peer_link: PortChannel10
+
+lag_members:
+  Ethernet72:
+    channel_group: 10
+  Ethernet76:
+    channel_group: 10
+
+vtep_number: 1
+tunnel_vlan: 1000

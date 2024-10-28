@@ -1,0 +1,116 @@
+---
+- name: Playbook to configure SPINE nodes
+  hosts: spine_group
+  gather_facts: no
+ 
+  tasks:
+
+    - name: Configure Loopback IP (underlay)
+      celestica.sonic.l3_interface:
+        config:
+          interface:
+            - name: "{{loopback0_interface}}"
+              ipv4: 
+                addresses:
+                  - address: "{{underlay_lb_ip}}/{{underlay_lb_ip_mask}}"
+        
+    - name: Configure interface link_local_ipv6 on leaf_going_interfaces
+      celestica.sonic.l3_interface:
+        config:
+          interface:
+            - name: "{{item}}"                 
+              ipv6:
+                link-local-only: true
+      with_items: "{{leaf_going_interfaces}}"
+
+    - name: Configure link_local_ipv6 on border_leaf_going_interfaces
+      celestica.sonic.l3_interface:
+        config:
+          interface:
+            - name: "{{item}}"                 
+              ipv6:
+                link-local-only: true
+      with_items: "{{border_leaf_going_interfaces}}"
+
+    - name: Configure BGP router-id, bestpath, ebgp-requires-policy
+      celestica.sonic.bgp:
+        config:
+          bgp:
+            - asn: "{{spine_asn}}"
+              router-id: "{{underlay_lb_ip}}"
+              ebgp-requires-policy: false
+              bestpath:
+                as-path:
+                  multipath-relax: true
+
+    - name: Configure BGP neighbors BORDER_LEAF & LEAF peer-group
+      celestica.sonic.bgp_neighbor:
+        config:
+          bgp:
+            - asn: "{{spine_asn}}" 
+              neighbor:
+                - id: "{{border_leaf_neighbor_tag}}"
+                  peer-group-enable: true
+                - id: "{{leaf_neighbor_tag}}"
+                  peer-group-enable: true
+
+    - name: Configure BGP neighbors BORDER_LEAF & LEAF remote-as
+      celestica.sonic.bgp_neighbor:
+        config:
+          bgp:
+            - asn: "{{spine_asn}}"
+              neighbor:
+                - id: "{{border_leaf_neighbor_tag}}"
+                  remote-as: external
+                - id: "{{leaf_neighbor_tag}}"
+                  remote-as: external
+
+    - name: Configure BGP neighbors on border_leaf_going_interfaces
+      celestica.sonic.bgp_neighbor:
+        config:
+          bgp:
+            - asn: "{{spine_asn}}" 
+              neighbor:                  
+                - id: "{{item}}"
+                  peer-group: "{{border_leaf_neighbor_tag}}"
+                  interface: true
+      with_items: "{{border_leaf_going_interfaces}}"
+
+    - name: Configure BGP neighbors on leaf_going_interfaces
+      celestica.sonic.bgp_neighbor:
+        config:
+          bgp:
+            - asn: "{{spine_asn}}" 
+              neighbor:                  
+                - id: "{{item}}"
+                  peer-group: "{{leaf_neighbor_tag}}"
+                  interface: true
+      with_items: "{{leaf_going_interfaces}}"
+
+    - name: Configure BGP address families (redistribute connected & advertise-all-vni)
+      celestica.sonic.bgp_af:
+        config:
+          bgp:
+            - asn: "{{spine_asn}}"
+              address-family:
+                - afi: ipv4
+                  safi: unicast
+                  redistribute:
+                    - protocol: connected
+                - afi: l2vpn
+                  safi: evpn
+                  advertise-all-vni: true
+
+    - name: Configure BGP L2VPN EVPN address family neighbor (neighbor <peer-group> activate)
+      celestica.sonic.bgp_af_neighbor:
+        config:
+          bgp:
+            - asn: "{{spine_asn}}"
+              address-family:
+                - afi: l2vpn
+                  safi: evpn
+                  neighbor:
+                    - id: "{{border_leaf_neighbor_tag}}"
+                      activate: true
+                    - id: "{{leaf_neighbor_tag}}"
+                      activate: true
