@@ -1,0 +1,14 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # NTP config in config-view
+  ntp-config:
+    subcommand:
+      - ntp=NAME:global source-interface=INTERFACE_PARAM&IGN_VAL_FOR_DEL $source-interface
+      - ntp=NAME:global vrf=IGN_VAL_FOR_DEL $vrf
+      - ntp=LIST:server&KEYS:$ip-addr server $ip-addr
+

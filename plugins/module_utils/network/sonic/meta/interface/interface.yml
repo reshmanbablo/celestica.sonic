@@ -1,0 +1,24 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # Ethernet interface mode config
+  eth-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST Ethernet $name
+    subcommand:
+      - advertise-speed=IGN_VAL_FOR_DEL $advertise-speed
+      - advertise-type=IGN_VAL_FOR_DEL $advertise-type
+      - channel-group=IGN_VAL_FOR_DEL $channel-group
+      - description=IGN_VAL_FOR_DEL $description
+      - fec=IGN_VAL_FOR_DEL $fec
+      - mtu=IGN_VAL_FOR_DEL $mtu
+      - tpid=IGN_VAL_FOR_DEL $tpid
+      - type=IGN_VAL_FOR_DEL $type
+      - speed=IGN_VAL_FOR_DEL $speed
+      - shutdown=NAME:enabled&VALUE:false
+      - no=SKIP shutdown=NAME:enabled&VALUE:true
+      - storm-control=LIST:storm-control&KEYS:$type type $type rate $rate
+

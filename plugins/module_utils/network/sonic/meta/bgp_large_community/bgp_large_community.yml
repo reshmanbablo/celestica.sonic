@@ -1,0 +1,11 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # BGP large-community list config
+  large-community-list-config:
+    subcommand:
+      - bgp=LIST:large-community-list&KEYS:$type|$id large-community-list $type=OPTIONAL&VALUE_CHECK_METHOD:!integer $id seq=LIST:sequence-numbers&KEYS:$seq $seq $action $number

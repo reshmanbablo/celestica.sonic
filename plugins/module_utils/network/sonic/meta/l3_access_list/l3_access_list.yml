@@ -1,0 +1,14 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # access list config in mode
+  access-list-config:
+    subcommand:
+      - ip-accesslist=LIST:access-list-ipv4&KEYS:$name $name seq=LIST:sequence-numbers&KEYS:$seq $seq $action $prefix
+      # - ip-accesslist=LIST:access-list-ipv4t&KEYS:$name $name seq=LIST:sequence-numbers&KEYS:$seq $seq remark $remark
+      - ipv6-accesslist=LIST:access-list-ipv6&KEYS:$name $name seq=LIST:sequence-numbers&KEYS:$seq $seq $action $prefix
+      # - ipv6-accesslist=LIST:access-list-ipv6t&KEYS:$name $name seq=LIST:sequence-numbers&KEYS:$seq $seq remark $remark

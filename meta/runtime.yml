@@ -1,0 +1,99 @@
+requires_ansible: '>=2.14.0'
+plugin_routing:
+  action:
+    command:
+      redirect: celestica.sonic.sonic
+    config:
+      redirect: celestica.sonic.sonic
+    facts:
+      redirect: celestica.sonic.sonic
+    radius:
+      redirect: celestica.sonic.sonic
+    ntp:
+      redirect: celestica.sonic.sonic
+    interface:
+      redirect: celestica.sonic.sonic
+    vlan:
+      redirect: celestica.sonic.sonic
+    snmp:
+      redirect: celestica.sonic.sonic
+    tacacs:
+      redirect: celestica.sonic.sonic
+    l2_interface:
+      redirect: celestica.sonic.sonic
+    l3_interface:
+      redirect: celestica.sonic.sonic
+    mclag:
+      redirect: celestica.sonic.sonic
+    sag:
+      redirect: celestica.sonic.sonic
+    vrf:
+      redirect: celestica.sonic.sonic
+    portchannel:
+      redirect: celestica.sonic.sonic
+    vxlan:
+      redirect: celestica.sonic.sonic
+    router:
+      redirect: celestica.sonic.sonic
+    loopback:
+      redirect: celestica.sonic.sonic
+    prefix_list:
+      redirect: celestica.sonic.sonic
+    tunnel:
+      redirect: celestica.sonic.sonic
+    route_map:
+      redirect: celestica.sonic.sonic
+    bgp_af:
+      redirect: celestica.sonic.sonic
+    bgp_af_neighbor:
+      redirect: celestica.sonic.sonic
+    bgp:
+      redirect: celestica.sonic.sonic
+    bgp_neighbor:
+      redirect: celestica.sonic.sonic
+    vrf_router:
+      redirect: celestica.sonic.sonic
+    l3_access_list:
+      redirect: celestica.sonic.sonic
+    bgp_community:
+      redirect: celestica.sonic.sonic
+    bgp_ext_community:
+      redirect: celestica.sonic.sonic
+    bgp_large_community:
+      redirect: celestica.sonic.sonic
+    access_list_ipv4:
+      redirect: celestica.sonic.sonic
+    access_list_ipv6:
+      redirect: celestica.sonic.sonic
+    access_list_mac:
+      redirect: celestica.sonic.sonic
+    qos_buffer:
+      redirect: celestica.sonic.sonic
+    qos_map:
+      redirect: celestica.sonic.sonic
+    qos_scheduler:
+      redirect: celestica.sonic.sonic
+    qos_wred:
+      redirect: celestica.sonic.sonic
+    sflow:
+      redirect: celestica.sonic.sonic
+    mirror_session:
+      redirect: celestica.sonic.sonic
+    lldp:
+      redirect: celestica.sonic.sonic
+    system:
+      redirect: celestica.sonic.sonic
+    dot1x:
+      redirect: celestica.sonic.sonic
+    edge_security:
+      redirect: celestica.sonic.sonic
+    syslog:
+      redirect: celestica.sonic.sonic
+    crm:
+      redirect: celestica.sonic.sonic
+    stp:
+      redirect: celestica.sonic.sonic
+    poe:
+      redirect: celestica.sonic.sonic
+    feature:
+      redirect: celestica.sonic.sonic

@@ -1,0 +1,20 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # VxLAN config in config mode
+  vxlan-config:
+    subcommand:
+      - vxlan-profile=TRANSLATE_METHOD:bool_to_enable_disable $vxlan-profile
+      - vxlan=LIST:vni-map&KEYS:$name vni-map $name $vni-id
+
+  # VxLAN config in VxLAN interface mode
+  vxlan-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST&NEGATE_CMD:ALLOW vxlan $name
+    subcommand:
+      - source-ip=IGN_VAL_FOR_DEL $source-ip vtep-mac $vtep-mac
+      - map=LIST:vni&KEYS:$vni-id|$vlan-id vni $vni-id vlan $vlan-id count $count
+

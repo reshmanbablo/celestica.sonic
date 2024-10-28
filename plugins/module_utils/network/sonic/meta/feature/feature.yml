@@ -1,0 +1,12 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # Feature config in config-view
+  feature-config:
+    subcommand:
+      - feature=LIST:feature&KEYS:$name $name state=TRANSLATE_METHOD:bool_to_enabled_disabled $state auto-restart=TRANSLATE_METHOD:bool_to_enabled_disabled $auto-restart owner $owner fallback=TRANSLATE_METHOD:bool_to_on_off $fallback
+

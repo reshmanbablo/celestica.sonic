@@ -1,0 +1,103 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # OSPFv4 interface config in Ethernet interface mode
+  eth-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST Ethernet $name
+    subcommand:
+      - ipv6=SKIP ospf6=SKIP advertise=SKIP prefix-list $advertise-prefix-list
+      - ipv6=SKIP ospf6=SKIP area $area
+      - ipv6=SKIP ospf6=SKIP authentication keychain $key-chain
+      - ipv6=SKIP ospf6=SKIP authentication key-id=NAME:key $id $algorithm $key-value
+      - ipv6=SKIP ospf6=SKIP bfd=NAME:bfd-enable&VALUE:true&NEGATE_CMD:ALLOW&IF_NEXT_VAL:1@EMPTY
+      - ipv6=SKIP ospf6=SKIP bfd=SKIP&IF_NEXT_VAL:1@NOT_EMPTY profile $bfd-profile
+      - ipv6=SKIP ospf6=SKIP cost $cost
+      - ipv6=SKIP ospf6=SKIP dead-interval $dead-interval
+      - ipv6=SKIP ospf6=SKIP dead-interval minimal hello-multiplier $hello-multiplier
+      - ipv6=SKIP ospf6=SKIP hello-interval $hello-interval
+      - ipv6=SKIP ospf6=SKIP ifmtu $ifmtu
+      - ipv6=SKIP ospf6=SKIP instance-id $instance-id
+      - ipv6=LIST:message-digest-key&KEYS:$id ospf message-digest-key $id $algorithm $key
+      - ipv6=SKIP ospf6=SKIP mtu-ignore=NAME:mtu-ignore&VALUE:true&NEGATE_CMD:ALLOW
+      - ipv6=SKIP ospf6=SKIP network $network
+      - ipv6=SKIP ospf6=SKIP passive=NAME:passive&VALUE:true&NEGATE_CMD:ALLOW
+      - ipv6=SKIP ospf6=SKIP priority $priority
+      - ipv6=SKIP ospf6=SKIP retransmit-interval $retransmit-interval
+      - ipv6=SKIP ospf6=SKIP transmit-delay $transmit-delay
+
+  # OSPFv4 interface config in Ethernet interface mode
+  po-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST PortChannel $name
+    subcommand:
+      - ipv6=SKIP ospf6=SKIP advertise=SKIP prefix-list $advertise-prefix-list
+      - ipv6=SKIP ospf6=SKIP area $area
+      - ipv6=SKIP ospf6=SKIP authentication keychain $key-chain
+      - ipv6=SKIP ospf6=SKIP authentication key-id=NAME:key $id $algorithm $key-value
+      - ipv6=SKIP ospf6=SKIP bfd=NAME:bfd-enable&VALUE:true&NEGATE_CMD:ALLOW&IF_NEXT_VAL:1@EMPTY
+      - ipv6=SKIP ospf6=SKIP bfd=SKIP&IF_NEXT_VAL:1@NOT_EMPTY profile $bfd-profile
+      - ipv6=SKIP ospf6=SKIP cost $cost
+      - ipv6=SKIP ospf6=SKIP dead-interval $dead-interval
+      - ipv6=SKIP ospf6=SKIP dead-interval minimal hello-multiplier $hello-multiplier
+      - ipv6=SKIP ospf6=SKIP hello-interval $hello-interval
+      - ipv6=SKIP ospf6=SKIP ifmtu $ifmtu
+      - ipv6=SKIP ospf6=SKIP instance-id $instance-id
+      - ipv6=LIST:message-digest-key&KEYS:$id ospf message-digest-key $id $algorithm $key
+      - ipv6=SKIP ospf6=SKIP mtu-ignore=NAME:mtu-ignore&VALUE:true&NEGATE_CMD:ALLOW
+      - ipv6=SKIP ospf6=SKIP network $network
+      - ipv6=SKIP ospf6=SKIP passive=NAME:passive&VALUE:true&NEGATE_CMD:ALLOW
+      - ipv6=SKIP ospf6=SKIP priority $priority
+      - ipv6=SKIP ospf6=SKIP retransmit-interval $retransmit-interval
+      - ipv6=SKIP ospf6=SKIP transmit-delay $transmit-delay
+
+  # OSPFv4 interface config in VLAN interface mode
+  vlan-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST Vlan $name
+    subcommand:
+      - ipv6=SKIP ospf6=SKIP advertise=SKIP prefix-list $advertise-prefix-list
+      - ipv6=SKIP ospf6=SKIP area $area
+      - ipv6=SKIP ospf6=SKIP authentication keychain $key-chain
+      - ipv6=SKIP ospf6=SKIP authentication key-id=NAME:key $id $algorithm $key-value
+      - ipv6=SKIP ospf6=SKIP bfd=NAME:bfd-enable&VALUE:true&NEGATE_CMD:ALLOW&IF_NEXT_VAL:1@EMPTY
+      - ipv6=SKIP ospf6=SKIP bfd=SKIP&IF_NEXT_VAL:1@NOT_EMPTY profile $bfd-profile
+      - ipv6=SKIP ospf6=SKIP cost $cost
+      - ipv6=SKIP ospf6=SKIP dead-interval $dead-interval
+      - ipv6=SKIP ospf6=SKIP dead-interval minimal hello-multiplier $hello-multiplier
+      - ipv6=SKIP ospf6=SKIP hello-interval $hello-interval
+      - ipv6=SKIP ospf6=SKIP ifmtu $ifmtu
+      - ipv6=SKIP ospf6=SKIP instance-id $instance-id
+      - ipv6=LIST:message-digest-key&KEYS:$id ospf message-digest-key $id $algorithm $key
+      - ipv6=SKIP ospf6=SKIP mtu-ignore=NAME:mtu-ignore&VALUE:true&NEGATE_CMD:ALLOW
+      - ipv6=SKIP ospf6=SKIP network $network
+      - ipv6=SKIP ospf6=SKIP passive=NAME:passive&VALUE:true&NEGATE_CMD:ALLOW
+      - ipv6=SKIP ospf6=SKIP priority $priority
+      - ipv6=SKIP ospf6=SKIP retransmit-interval $retransmit-interval
+      - ipv6=SKIP ospf6=SKIP transmit-delay $transmit-delay
+
+  # OSPFv4 interface config in Loopback interface mode
+  lpbk-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST Loopback $name
+    subcommand:
+      - ipv6=SKIP ospf6=SKIP advertise=SKIP prefix-list $advertise-prefix-list
+      - ipv6=SKIP ospf6=SKIP area $area
+      - ipv6=SKIP ospf6=SKIP authentication keychain $key-chain
+      - ipv6=SKIP ospf6=SKIP authentication key-id=NAME:key $id $algorithm $key-value
+      - ipv6=SKIP ospf6=SKIP bfd=NAME:bfd-enable&VALUE:true&NEGATE_CMD:ALLOW&IF_NEXT_VAL:1@EMPTY
+      - ipv6=SKIP ospf6=SKIP bfd=SKIP&IF_NEXT_VAL:1@NOT_EMPTY profile $bfd-profile
+      - ipv6=SKIP ospf6=SKIP cost $cost
+      - ipv6=SKIP ospf6=SKIP dead-interval $dead-interval
+      - ipv6=SKIP ospf6=SKIP dead-interval minimal hello-multiplier $hello-multiplier
+      - ipv6=SKIP ospf6=SKIP hello-interval $hello-interval
+      - ipv6=SKIP ospf6=SKIP ifmtu $ifmtu
+      - ipv6=SKIP ospf6=SKIP instance-id $instance-id
+      - ipv6=LIST:message-digest-key&KEYS:$id ospf message-digest-key $id $algorithm $key
+      - ipv6=SKIP ospf6=SKIP mtu-ignore=NAME:mtu-ignore&VALUE:true&NEGATE_CMD:ALLOW
+      - ipv6=SKIP ospf6=SKIP network $network
+      - ipv6=SKIP ospf6=SKIP passive=NAME:passive&VALUE:true&NEGATE_CMD:ALLOW
+      - ipv6=SKIP ospf6=SKIP priority $priority
+      - ipv6=SKIP ospf6=SKIP retransmit-interval $retransmit-interval
+      - ipv6=SKIP ospf6=SKIP transmit-delay $transmit-delay
+

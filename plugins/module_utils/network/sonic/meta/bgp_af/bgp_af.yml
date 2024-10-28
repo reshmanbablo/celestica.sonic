@@ -1,0 +1,28 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # BGP config in BGP router mode
+  bgp-router-config:
+    command: router=LIST:bgp&KEYS:$asn|$vrf|$view bgp $asn vrf $vrf view $view
+    # BGP router address family view
+    bgp-router-af-config:
+      command: address-family=LIST:address-family&KEYS:$afi|$safi&EXIT_CMD:exit-address-family $afi $safi
+      subcommand:
+        - aggregate-address=LIST:aggregate&KEYS:$address&NEGATE_CMD:ALLOW $address as-set=NAME:as-set&VALUE:true&OPTIONAL origin $origin route-map $route-map summary-only=NAME:summary-only&VALUE:true&OPTIONAL
+        # TODO: Revisit bgp dampening command
+        # - bgp=SKIP dampening $half-life-time=OPTIONAL $reuse-value $suppress-value $suppress-stable-route
+        # - advertise ipv4 unicast=NAME:unicast&VALUE:true gateway-ip=NAME:gateway-ip&VALUE:true&OPTIONAL&NEGATE_CMD:SKIP route-map $route-map
+        # - advertise ipv6 unicast=NAME:unicast&VALUE:true gateway-ip=NAME:gateway-ip&VALUE:true&OPTIONAL&NEGATE_CMD:SKIP route-map $route-map
+        - advertise-all-vni=NAME:advertise-all-vni&VALUE:true&NEGATE_CMD:ALLOW
+        # - distance bgp $ebgp $ibgp $local
+        # - distance $value=LIST:metric&KEYS:$value|$prefix $prefix
+        - maximum-paths=NAME:max-path&NO_PARAM $ebgp=VALUE_CHECK_METHOD:integer
+        - maximum-paths=NAME:max-path ibgp $ibgp equal-cluster-length=NAME:equal-cluster-length&VALUE:true&OPTIONAL&NEGATE_CMD:SKIP
+        - network=LIST:network&KEYS:$prefix&NEGATE_CMD:ALLOW $prefix backdoor=NAME:backdoor&VALUE:true&OPTIONAL route-map $route-map
+        - redistribute=LIST:redistribute&KEYS:$protocol|$instance-id $protocol $instance-id=OPTIONAL&VALUE_CHECK_METHOD:integer metric $metric route-map $route-map
+        - table-map $table-map
+

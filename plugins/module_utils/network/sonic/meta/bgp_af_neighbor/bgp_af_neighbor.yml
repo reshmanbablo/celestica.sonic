@@ -1,0 +1,42 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # BGP config in BGP router mode
+  bgp-router-config:
+    command: router=LIST:bgp&KEYS:$asn|$vrf|$view bgp $asn vrf $vrf view $view
+    # Neighbor config in BGP address-family mode
+    bgp-router-af-view:
+      command: address-family=LIST:address-family&KEYS:$afi|$safi&EXIT_CMD:exit-address-family $afi $safi
+      subcommand:
+        - neighbor=LIST_GROUP:neighbor&KEYS:$id $id activate=NAME:activate&VALUE:true&NEGATE_CMD:ALLOW
+        - neighbor=LIST_GROUP:neighbor&KEYS:$id $id addpath-tx-all-paths=NAME:addpath-tx-all-paths&VALUE:true&NEGATE_CMD:ALLOW
+        - neighbor=LIST_GROUP:neighbor&KEYS:$id $id addpath-tx-bestpath-per-AS=NAME:addpath-tx-bestpath-per-as&VALUE:true&NEGATE_CMD:ALLOW
+        # - neighbor=LIST_GROUP:neighbor&KEYS:$id $id allowas-in=NAME:allowas-in-origin&VALUE:true&NEGATE_CMD:SKIP origin=NAME:allowas-in-origin&VALUE:true&NEGATE_CMD:SKIP
+        # - neighbor=LIST_GROUP:neighbor&KEYS:$id $id allowas-in=SKIP $allowas-in-asn
+        - neighbor=LIST_GROUP:neighbor&KEYS:$id $id as-override=NAME:as-override&VALUE:true&NEGATE_CMD:ALLOW
+        - neighbor=LIST_GROUP:neighbor&KEYS:$id $id attribute-unchanged=NAME:attribute-unchanged&VALUE:true&NEGATE_CMD:SKIP $attribute-unchanged-type=PARENT_NAME:attribute-unchanged&OPTIONAL
+        # - neighbor=LIST_GROUP:neighbor&KEYS:$id $id capability orf prefix-list $prefix-list
+        - neighbor=LIST_GROUP:neighbor&KEYS:$id $id default-originate=NAME:default-originate&VALUE:true&NEGATE_CMD:SKIP route-map=PARENT_NAME:default-originate $default-originate-route-map
+        # - neighbor=LIST_GROUP:neighbor&KEYS:$id $id distribute-list=IF_NEXT_VAL:3@in $distribute-list-ingress in=SKIP&PARENT_NAME:distribute-list-ingress
+        # - neighbor=LIST_GROUP:neighbor&KEYS:$id $id distribute-list=IF_NEXT_VAL:3@out $distribute-list-egress out=SKIP&PARENT_NAME:distribute-list-egress
+        # - neighbor=LIST_GROUP:neighbor&KEYS:$id $id filter-list=IF_NEXT_VAL:3@in $filter-list-ingress in=SKIP&PARENT_NAME:filter-list-ingress
+        # - neighbor=LIST_GROUP:neighbor&KEYS:$id $id filter-list=IF_NEXT_VAL:3@out $filter-list-egress out=SKIP&PARENT_NAME:filter-list-egress
+        # - neighbor=LIST_GROUP:neighbor&KEYS:$id $id maximum-prefix $maximum-prefix force=NAME:maximum-prefix-force&VALUE:true&OPTIONAL&PARENT_NAME:maximum-prefix $max-prefix-threshold=OPTIONAL&PARENT_NAME:maximum-prefix restart=OPTIONAL&PARENT_NAME:maximum-prefix $max-prefix-restart warning-only=NAME:maximum-prefix-warning-only&VALUE:true&OPTIONAL&PARENT_NAME:maximum-prefix
+        - neighbor=LIST_GROUP:neighbor&KEYS:$id $id maximum-prefix-out $maximum-prefix-out
+        - neighbor=LIST_GROUP:neighbor&KEYS:$id $id next-hop-self=NAME:next-hop-self&VALUE:true&NEGATE_CMD:SKIP force=NAME:next-hop-self-force&VALUE:true&NEGATE_CMD:SKIP&PARENT_NAME:next-hop-self
+        # - neighbor=LIST_GROUP:neighbor&KEYS:$id $id prefix-list=IF_NEXT_VAL:3@in $prefix-list-ingress in=SKIP&PARENT_NAME:prefix-list-ingress
+        # - neighbor=LIST_GROUP:neighbor&KEYS:$id $id prefix-list=IF_NEXT_VAL:3@out $prefix-list-egress out=SKIP&PARENT_NAME:prefix-list-egress
+        - neighbor=LIST_GROUP:neighbor&KEYS:$id $id remove-private-AS=NAME:remove-private-as&VALUE:true&NEGATE_CMD:SKIP all=NAME:remove-private-as-all&VALUE:true&NEGATE_CMD:SKIP&PARENT_NAME:remove-private-as&OPTIONAL replace-AS=NAME:remove-private-as-replace-as&VALUE:true&NEGATE_CMD:SKIP&PARENT_NAME:remove-private-as&OPTIONAL
+        # - neighbor=LIST_GROUP:neighbor&KEYS:$id $id route-map=IF_NEXT_VAL:3@in $route-map-ingress in=SKIP&PARENT_NAME:route-map-ingress
+        # - neighbor=LIST_GROUP:neighbor&KEYS:$id $id route-map=IF_NEXT_VAL:3@out $route-map-egress out=SKIP&PARENT_NAME:route-map-egress
+        - neighbor=LIST_GROUP:neighbor&KEYS:$id $id route-reflector-client=NAME:route-reflector-client&VALUE:true&NEGATE_CMD:ALLOW
+        - neighbor=LIST_GROUP:neighbor&KEYS:$id $id route-server-client=NAME:route-server-client&VALUE:true&NEGATE_CMD:ALLOW
+        - neighbor=LIST_GROUP:neighbor&KEYS:$id $id send-community $send-community
+        - neighbor=LIST_GROUP:neighbor&KEYS:$id $id unsuppress-map $unsuppress-map
+        - neighbor=LIST_GROUP:neighbor&KEYS:$id $id soft-reconfiguration inbound=NAME:inbound&VALUE:true&NEGATE_CMD:SKIP
+        - neighbor=LIST_GROUP:neighbor&KEYS:$id $id weight $weight
+

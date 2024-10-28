@@ -1,0 +1,31 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # IPv4 access list config in acl-ipv4 mode
+  ipv4-access-list-config:
+    command: ip=LIST:access-list&KEYS:$name access-list $name
+    subcommand:
+      - sequence=LIST:sequence-numbers&KEYS:$seq $seq $action $protocol $src src-eq=PARENT_NAME:src&OPTIONAL $src-port-eq src-range=PARENT_NAME:src&OPTIONAL $src-port-range-start $src-port-range-end=PARENT_NAME:src&OPTIONAL&VALUE_CHECK_METHOD:integer $dst dst-eq=PARENT_NAME:dst&OPTIONAL $dst-port-eq dst-range=PARENT_NAME:dst&OPTIONAL $dst-port-range-start $dst-port-range-end=PARENT_NAME:dst&OPTIONAL&VALUE_CHECK_METHOD:integer dscp $dscp fin=NAME:tcp-flag-fin&VALUE:true&OPTIONAL syn=NAME:tcp-flag-syn&VALUE:true&OPTIONAL rst=NAME:tcp-flag-rst&VALUE:true&OPTIONAL psh=NAME:tcp-flag-psh&VALUE:true&OPTIONAL ack=NAME:tcp-flag-ack&VALUE:true&OPTIONAL urg=NAME:tcp-flag-urg&VALUE:true&OPTIONAL
+
+  # IPv4 access-group config in Ethernet interface mode
+  eth-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST Ethernet $name
+    subcommand:
+      - ip=LIST:access-group&KEYS:$access-list|$direction access-group $access-list $direction
+
+  # IPv4 access-group config in PortChannel interface mode
+  po-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST PortChannel $name
+    subcommand:
+      - ip=LIST:access-group&KEYS:$access-list|$direction access-group $access-list $direction
+
+  # IPv4 access-group config in Vlan interface mode
+  vlan-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST Vlan $name
+    subcommand:
+      - ip=LIST:access-group&KEYS:$access-list|$direction access-group $access-list $direction
+

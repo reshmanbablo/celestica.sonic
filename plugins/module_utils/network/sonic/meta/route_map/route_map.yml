@@ -1,0 +1,74 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # Route map config in route-map mode
+  route-map-config:
+    command: route-map=LIST:route-map&KEYS:$name|$action|$seq&NEGATE_CMD:ALLOW&EXIT_CMD:exit $name $action $seq
+    subcommand:
+      - match as-path=IGN_VAL_FOR_DEL $as-path
+      - match community=IGN_VAL_FOR_DEL $community exact-match=NAME:community-exact-match&VALUE:true&NEGATE_CMD:ALLOW
+      - match extcommunity=IGN_VAL_FOR_DEL $extended-community
+      - match interface=IGN_VAL_FOR_DEL $interface
+      # - match ip address=IGN_VAL_FOR_DEL $access-list
+      # - match ip address=IGN_VAL_FOR_DEL $access-list-number
+      - match ip address prefix-list=IGN_VAL_FOR_DEL $prefix-list
+      - match ip address prefix-len=IGN_VAL_FOR_DEL $prefix-length
+      # - match ip next-hop=IGN_VAL_FOR_DEL $access-list
+      # - match ip next-hop=IGN_VAL_FOR_DEL $access-list-number
+      - match ip next-hop address=IGN_VAL_FOR_DEL $address
+      - match ip next-hop prefix-list=IGN_VAL_FOR_DEL $prefix-list
+      - match ip next-hop prefix-len=IGN_VAL_FOR_DEL $prefix-length
+      - match ip next-hop type=IGN_VAL_FOR_DEL $type
+      # - match ipv6 address=IGN_VAL_FOR_DEL $access-list
+      - match ipv6 address prefix-list=IGN_VAL_FOR_DEL $prefix-list
+      - match ipv6 address prefix-len=IGN_VAL_FOR_DEL $prefix-length
+      # - match ipv6 next-hop=IGN_VAL_FOR_DEL $address
+      - match ipv6 next-hop type=IGN_VAL_FOR_DEL $type
+      - match large-community=IGN_VAL_FOR_DEL $large-community exact-match=NAME:large-community-exact-match&VALUE:true&NEGATE_CMD:ALLOW
+      - match local-preference=IGN_VAL_FOR_DEL $local-preference
+      - match metric=IGN_VAL_FOR_DEL $metric
+      - match origin=IGN_VAL_FOR_DEL $origin
+      - match peer=IGN_VAL_FOR_DEL $peer
+      - match source-instance=IGN_VAL_FOR_DEL $source-instance
+      - match source-protocol=IGN_VAL_FOR_DEL $source-protocol
+      - match source-vrf $source-vrf
+      - match tag=IGN_VAL_FOR_DEL $tag
+      - on-match goto=IGN_VAL_FOR_DEL $goto
+      - on-match next=NAME:next&VALUE:true&NEGATE_CMD:ALLOW
+      - set aggregator as=SKIP $asn-number=IGN_VAL_FOR_DEL $ip-addr=IGN_VAL_FOR_DEL
+      - set as-path exclude=IGN_VAL_FOR_DEL $exclude
+      - set as-path prepend=IGN_VAL_FOR_DEL $prepend
+      - set atomic-aggregate=NAME:atomic-aggregate&VALUE:true&NEGATE_CMD:ALLOW
+      # - set comm-list=IGN_VAL_FOR_DEL $delete-community-list delete=SKIP
+      - set community $community-list additive=NAME:community-list-additive&VALUE:true&NEGATE_CMD:SKIP
+      - set distance=IGN_VAL_FOR_DEL $distance
+      - set extcommunity=NAME:ext-community bandwidth=IGN_VAL_FOR_DEL $bandwidth non-transitive=NAME:non-transitive&VALUE:true&NEGATE_CMD:ALLOW&OPTIONAL
+      - set extcommunity=NAME:ext-community rt=IGN_VAL_FOR_DEL $rt
+      - set extcommunity=NAME:ext-community soo=IGN_VAL_FOR_DEL $soo
+      - set forwarding-address $forwarding-address
+      # - set ip=SKIP next-hop=NAME:ipv4-next-hop=IGN_VAL_FOR_DEL $address
+      - set ip=SKIP next-hop=NAME:ipv4-next-hop peer-address=NAME:peer-address&VALUE:true&NEGATE_CMD:ALLOW
+      - set ip=SKIP next-hop=NAME:ipv4-next-hop unchanged=NAME:unchanged&VALUE:true&NEGATE_CMD:ALLOW
+      - set ipv4=SKIP vpn=SKIP next-hop=SKIP $ipv4-vpn-next-hop=IGN_VAL_FOR_DEL
+      - set ipv6=SKIP next-hop=NAME:ipv6-next-hop global $global-address
+      - set ipv6=SKIP next-hop=NAME:ipv6-next-hop local=IGN_VAL_FOR_DEL $local-address
+      - set ipv6=SKIP next-hop=NAME:ipv6-next-hop peer-address=NAME:peer-address&VALUE:true&NEGATE_CMD:ALLOW
+      - set ipv6=SKIP next-hop=NAME:ipv6-next-hop prefer-global=NAME:prefer-global&VALUE:true&NEGATE_CMD:ALLOW
+      - set ipv6=SKIP vpn=SKIP next-hop=SKIP $ipv6-vpn-next-hop=IGN_VAL_FOR_DEL
+      # - set large-comm-list=IGN_VAL_FOR_DEL $delete-large-community-list delete=SKIP
+      - set large-community $large-community-list additive=NAME:large-community-list-additive&VALUE:true&NEGATE_CMD:SKIP
+      - set local-preference=IGN_VAL_FOR_DEL $local-preference
+      - set metric=IGN_VAL_FOR_DEL $metric
+      - set metric-type=IGN_VAL_FOR_DEL $metric-type
+      - set origin=IGN_VAL_FOR_DEL $origin
+      - set originator-id=IGN_VAL_FOR_DEL $originator-id
+      - set src=IGN_VAL_FOR_DEL $source-address
+      - set table=IGN_VAL_FOR_DEL $table
+      - set tag=IGN_VAL_FOR_DEL $tag
+      - set weight=IGN_VAL_FOR_DEL $weight
+      - call=IGN_VAL_FOR_DEL $call
+

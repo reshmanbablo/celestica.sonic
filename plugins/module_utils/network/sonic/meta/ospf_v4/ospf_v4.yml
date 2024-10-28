@@ -1,0 +1,69 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # OSPFv4 config in router ospf mode
+  router-ospfv4-config:
+    command: router=LIST:ospf_v4&KEYS:$vrf ospf $vrf
+    subcommand:
+      - aggregation=SKIP timer=IGN_VAL_FOR_DEL $aggregation-time
+      - auto-cost=SKIP reference-bandwidth $reference-bandwidth
+      - capability=SKIP opaque=NAME:opaque-capability&VALUE:true&NEGATE_CMD:ALLOW
+      - compatible=SKIP rfc1583=NAME:rfc1583-compatible&VALUE:true&NEGATE_CMD:ALLOW
+      - default-information originate always=NAME:always&VALUE:true&NEGATE_CMD:ALLOW&OPTIONAL metric $metric metric-type $metric-type route-map $route-map
+      - default-metric $default-metric
+      - distance=IF_NEXT_VAL:2@EMPTY $distance
+      - distance=IF_NEXT_VAL:2@NOT_EMPTY ospf external $external-distance inter-area $inter-area-distance intra-area $intra-area-distance
+      - distribute-list=LIST:distribute-list&KEYS:$protocol&NEGATE_CMD:ALLOW $access-list $direction $protocol
+      - fast-reroute ti-lfa=NAME:ti-lfa&VALUE:true&NEGATE_CMD:ALLOW node-protection=NAME:node-protection&VALUE:true&NEGATE_CMD:SKIP&OPTIONAL
+      - graceful-restart=NAME:graceful-restart/enable&VALUE:true&NEGATE_CMD:ALLOW&IF_NEXT_VAL:1@EMPTY
+      - graceful-restart grace-period $grace-period
+      - graceful-restart helper enable=NAME:enable&VALUE:true&NEGATE_CMD:ALLOW
+      - graceful-restart helper planned-only=NAME:planned-only&VALUE:true&NEGATE_CMD:ALLOW
+      - graceful-restart helper strict-lsa-checking=NAME:strict-lsa-checking&VALUE:true&NEGATE_CMD:ALLOW
+      - graceful-restart helper supported-grace-time $grace-period
+      - log-adjacency-changes=NAME:log-adjacency-changes/enable&VALUE:true&NEGATE_CMD:ALLOW detail=NAME:detail&VALUE:true&NEGATE_CMD:SKIP&OPTIONAL
+      - max-metric router-lsa administrative=NAME:administrative&VALUE:true&NEGATE_CMD:ALLOW
+      - max-metric router-lsa on-shutdown $on-shutdown
+      - max-metric router-lsa on-startup $on-startup
+      - maximum-paths=IGN_VAL_FOR_DEL $maximum-paths
+      - neighbor=LIST:neighbor&KEYS:$id&NEGATE_CMD:ALLOW $id $priority $poll-interval
+      - network=LIST:network&KEYS:$prefix|$area&NEGATE_CMD:ALLOW $prefix $area
+      - ospf=SKIP router-id $router-id
+      - ospf=SKIP send-extra-data=SKIP zebra=NAME:send-extra-data-zebra&VALUE:true&NEGATE_CMD:ALLOW
+      - ospf=SKIP write-multiplier $write-multiplier
+      - passive-interface=SKIP send-extra-data=SKIP default=NAME:passive-interface-default&VALUE:true&NEGATE_CMD:ALLOW
+      - no=SKIP proactive-arp=NAME:proactive-arp&VALUE:false&NEGATE_CMD:ALLOW
+      - redistribute=LIST:redistribute&KEYS:$protocol&NEGATE_CMD:ALLOW $protocol metric $metric metric-type $metric-type route-map $route-map
+      - refresh=SKIP timer $refresh-time
+      - router-info area=NAME:area&VALUE:true&NEGATE_CMD:ALLOW
+      - router-info as=NAME:as&VALUE:true&NEGATE_CMD:ALLOW
+      - summary-address=LIST:summary-address&KEYS:$ip&NEGATE_CMD:ALLOW $ip tag $tag no-advertise=NAME:no-advertise&VALUE:true&NEGATE_CMD:ALLOW
+      - timers lsa=SKIP min-arrival $lsa-min-arrival
+      - timers throttle lsa=SKIP all $lsa-all
+      - timers throttle spf $first-change-delay $initial-hold-time $max-hold-time
+      - area=LIST_GROUP:area&KEYS:$id $id authentication=NAME:authentication&VALUE:true&NEGATE_CMD:SKIP message-digest=NAME:message-digest&VALUE:true&NEGATE_CMD:SKIP
+      - area=LIST_GROUP:area&KEYS:$id $id default-cost $default-cost
+      - area=LIST_GROUP:area&KEYS:$id $id export-list $export-list
+      - area=LIST_GROUP:area&KEYS:$id $id filter-list prefix $filter-prefix-list-ingress=IF_NEXT_VAL:1@in in
+      - area=LIST_GROUP:area&KEYS:$id $id filter-list prefix $filter-prefix-list-egress=IF_NEXT_VAL:1@out out
+      - area=LIST_GROUP:area&KEYS:$id $id import-list $import-list
+      - area=LIST_GROUP:area&KEYS:$id $id nssa=NAME:nssa&VALUE:true&NEGATE_CMD:ALLOW
+      - area=LIST_GROUP:area&KEYS:$id $id nssa=SKIP no-summary=NAME:nssa-no-summary&VALUE:true&NEGATE_CMD:ALLOW
+      - area=LIST_GROUP:area&KEYS:$id $id nssa=SKIP suppress-fa=NAME:nssa-suppress-fa&VALUE:true&NEGATE_CMD:ALLOW
+      - area=LIST_GROUP:area&KEYS:$id $id nssa=SKIP translate-always=NAME:nssa-translate-always&VALUE:true&NEGATE_CMD:ALLOW
+      - area=LIST_GROUP:area&KEYS:$id $id nssa=SKIP translate-never=NAME:nssa-translate-never&VALUE:true&NEGATE_CMD:ALLOW
+      - area=LIST_GROUP:area&KEYS:$id $id range=LIST:range&KEYS:$ip $ip cost $cost $not-advertise=NAME:not-advertise&VALUE:true&NEGATE_CMD:SKIP substitute $substitute
+      - area=LIST_GROUP:area&KEYS:$id $id shortcut=SKIP enable=NAME:shortcut-enable&VALUE:true&NEGATE_CMD:ALLOW
+      - area=LIST_GROUP:area&KEYS:$id $id stub=NAME:stub-enable&VALUE:true&NEGATE_CMD:ALLOW no-summary=NAME:stub-no-summary&VALUE:true&NEGATE_CMD:SKIP
+      - area=LIST_GROUP:area&KEYS:$id $id virtual-link=LIST_GROUP:virtual-link&KEYS:$ip $ip authentication=NAME:authentication-enable&VALUE:true&NEGATE_CMD:SKIP message-digest=NAME:message-digest&VALUE:true&NEGATE_CMD:SKIP
+      - area=LIST_GROUP:area&KEYS:$id $id virtual-link=LIST_GROUP:virtual-link&KEYS:$ip $ip authentication-key $authentication-key
+      - area=LIST_GROUP:area&KEYS:$id $id virtual-link=LIST_GROUP:virtual-link&KEYS:$ip $ip dead-interval $dead-interval
+      - area=LIST_GROUP:area&KEYS:$id $id virtual-link=LIST_GROUP:virtual-link&KEYS:$ip $ip hello-interval $hello-interval
+      - area=LIST_GROUP:area&KEYS:$id $id virtual-link=LIST_GROUP:virtual-link&KEYS:$ip $ip retransmit-interval $retransmit-interval
+      - area=LIST_GROUP:area&KEYS:$id $id virtual-link=LIST_GROUP:virtual-link&KEYS:$ip $ip transmit-delay $transmit-delay
+      - area=LIST_GROUP:area&KEYS:$id $id virtual-link=LIST_GROUP:virtual-link&KEYS:$ip $ip message-digest-key=LIST:message-digest-key&KEYS:$id $id $algorithm $key
+

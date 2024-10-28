@@ -1,0 +1,22 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # sFlow config in config-view
+  sflow-global-config:
+    subcommand:
+      - sflow=NAME:global agent-id=INTERFACE_PARAM&IGN_VAL_FOR_DEL $agent
+      - sflow=NAME:global enable=NAME:enable&VALUE:true&NEGATE_CMD:ALLOW
+      - sflow=NAME:global interface=SKIP disable=SKIP all=NAME:interface-disable-all&VALUE:true&NEGATE_CMD:ALLOW
+      - sflow=NAME:global polling-interval=IGN_VAL_FOR_DEL $polling-interval
+      - sflow=SKIP collector=LIST:collector&KEYS:$ip-addr|$port $ip-addr $port
+
+  # sFlow config in ethernet interface mode
+  sflow-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST Ethernet $name
+    subcommand:
+      - sflow=SKIP enable=NAME:enable&VALUE:true&NEGATE_CMD:ALLOW
+      - sflow=SKIP sampling-rate=IGN_VAL_FOR_DEL $sampling-rate

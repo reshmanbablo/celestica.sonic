@@ -1,0 +1,16 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # SNMP config in config-view
+  snmp-config:
+    subcommand:
+      - snmp-server contact=IGN_VAL_FOR_DEL $contact
+      - snmp-server location=IGN_VAL_FOR_DEL $location
+      - snmp-server=LIST:community&KEYS:$name community $name $access=TRANSLATE_METHOD:translate_snmp_access
+      - snmp-server=LIST:agent-address&KEYS:$ip-addr|$port|$vrf agent-address $ip-addr port $port vrf $vrf
+      - snmp-server=LIST:trap-host&KEYS:$ip-addr|$version host $ip-addr version $version community $community port $port vrf $vrf
+      - snmp-server=LIST:user&KEYS:$name user $name $user-type $auth-algorithm=IF_PARENT_VAL:AuthNoPriv|Priv&TRANSLATE_METHOD:lower_to_upper encrypted-auth-password=IF_PARENT_VAL:AuthNoPriv|Priv $encrypted-auth-password $encrypt-algorithm=IF_PARENT_VAL:Priv&TRANSLATE_METHOD:lower_to_upper encrypted-encrypt-password=IF_PARENT_VAL:Priv $encrypted-encrypt-password $access=TRANSLATE_METHOD:translate_snmp_access

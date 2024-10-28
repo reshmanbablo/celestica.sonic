@@ -1,0 +1,14 @@
+namespace: celestica
+name: sonic
+version: 1.0.0
+readme: README.md
+authors:
+- Dharmaraj Gurusamy <sonic-ansible-team-cls@celestica.com>
+- Reshman Bablo B <sonic-ansible-team-cls@celestica.com>
+description: Ansible Network Collection for Celestica SONiC network operating system.
+license_file: LICENSE
+tags: [celestica, sonic, networking, nos]
+dependencies:
+  "ansible.netcommon": ">5.0.0"
+repository: https://github.com/celestica/celestica.sonic
+issues: https://github.com/celestica/celestica.sonic/issues

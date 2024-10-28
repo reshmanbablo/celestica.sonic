@@ -1,0 +1,13 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # CRM config in config-view
+  crm-config:
+    subcommand:
+      - crm=NAME:global polling-interval=IGN_VAL_FOR_DEL $polling-interval
+      - crm=LIST:resource&KEYS:$name threshold resource $name threshold-type $threshold-type high-threshold $high-threshold low-threshold $low-threshold
+

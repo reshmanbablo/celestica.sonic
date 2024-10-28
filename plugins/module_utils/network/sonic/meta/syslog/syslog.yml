@@ -1,0 +1,12 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # Syslog config in config-view
+  syslog-config:
+    subcommand:
+      - syslog=LIST:server&KEYS:$ip-addr server $ip-addr
+

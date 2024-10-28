@@ -1,0 +1,151 @@
+ancestor: null
+releases:
+  1.0.0:
+    modules:
+    - description: Network resource module to manage IPv4 access-list configurations.
+      name: access_list_ipv4
+      namespace: ''
+    - description: Network resource module to manage IPv6 access-list configurations.
+      name: access_list_ipv6
+      namespace: ''
+    - description: Network resource module to manage MAC access-list configurations.
+      name: access_list_mac
+      namespace: ''
+    - description: Network resource module to manage BGP configurations.
+      name: bgp
+      namespace: ''
+    - description: Network resource module to manage BGP address family configurations.
+      name: bgp_af
+      namespace: ''
+    - description: Network resource module to manage BGP neighbor in address family configurations.
+      name: bgp_af_neighbor
+      namespace: ''
+    - description: Network resource module to manage BGP community configurations.
+      name: bgp_community
+      namespace: ''
+    - description: Network resource module to manage BGP extended community configurations.
+      name: bgp_ext_community
+      namespace: ''
+    - description: Network resource module to manage BGP large community configurations.
+      name: bgp_large_community
+      namespace: ''
+    - description: Network resource module to manage BGP neighbor configurations.
+      name: bgp_neighbor
+      namespace: ''
+    - description: Run arbitrary command on Celestica SONiC devices.
+      name: command
+      namespace: ''
+    - description: Manages configuration sections on Celestica SONiC devices.
+      name: config
+      namespace: ''
+    - description: Network resource module to manage CRM (Critical Resource Monitoring) configurations.
+      name: crm
+      namespace: ''
+    - description: Network resource module to manage dot1x configurations.
+      name: dot1x
+      namespace: ''
+    - description: Network resource module to manage edge-security configurations.
+      name: edge_security
+      namespace: ''
+    - description: Network resource module to manage feature configurations.
+      name: feature
+      namespace: ''
+    - description: Network resource module to manage Ethernet interface configurations.
+      name: interface
+      namespace: ''
+    - description: Network resource module to manage interface to VLAN association based on access or trunk mode configurations.
+      name: l2_interface
+      namespace: ''
+    - description: Network resource module to manage Layer3 access-list configurations.
+      name: l3_access_list
+      namespace: ''
+    - description: Network resource module to manage Layer2 interface configurations.
+      name: l3_interface
+      namespace: ''
+    - description: Network resource module to manage LLDP configurations.
+      name: lldp
+      namespace: ''
+    - description: Network resource module to manage loopback interface configurations.
+      name: loopback
+      namespace: ''
+    - description: Network resource module to manage McLAG configurations.
+      name: mclag
+      namespace: ''
+    - description: Network resource module to manage mirror session configurations.
+      name: mirror_session
+      namespace: ''
+    - description: Network resource module to manage NTP configurations.
+      name: ntp
+      namespace: ''
+    - description: Network resource module to manage PoE configurations.
+      name: poe
+      namespace: ''
+    - description: Network resource module to manage Portchannel interface configurations.
+      name: portchannel
+      namespace: ''
+    - description: Network resource module to manage prefix-list configurations.
+      name: prefix_list
+      namespace: ''
+    - description: Network resource module to manage QoS buffer configurations.
+      name: qos_buffer
+      namespace: ''
+    - description: Network resource module to manage QoS map configurations.
+      name: qos_map
+      namespace: ''
+    - description: Network resource module to manage QoS scheduler configurations.
+      name: qos_scheduler
+      namespace: ''
+    - description: Network resource module to manage QoS WRED configurations.
+      name: qos_wred
+      namespace: ''
+    - description: Network resource module to manage RADIUS configurations.
+      name: radius
+      namespace: ''
+    - description: Network resource module to manage route map configurations.
+      name: route_map
+      namespace: ''
+    - description: Network resource module to manage router with default VRF configurations.
+      name: router
+      namespace: ''
+    - description: Network resource module to manage SAG configurations.
+      name: sag
+      namespace: ''
+    - description: Network resource module to manage sFlow configurations.
+      name: sflow
+      namespace: ''
+    - description: Network resource module to manage SNMP configurations.
+      name: snmp
+      namespace: ''
+    - description: Network resource module to manage STP configurations.
+      name: stp
+      namespace: ''
+    - description: Network resource module to manage syslog configurations.
+      name: syslog
+      namespace: ''
+    - description: Network resource module to manage global system specific configurations.
+      name: system
+      namespace: ''
+    - description: Network resource module to manage TACACS+ configurations.
+      name: tacacs
+      namespace: ''
+    - description: Network resource module to manage Tunnel interface configurations.
+      name: tunnel
+      namespace: ''
+    - description: Network resource module to manage VLAN interface configurations.
+      name: vlan
+      namespace: ''
+    - description: Network resource module to manage VRF configurations.
+      name: vrf
+      namespace: ''
+    - description: Network resource module to manage router with VRF configurations.
+      name: vrf_router
+      namespace: ''
+    - description: Network resource module to manage VxLAN interface configurations.
+      name: vxlan
+      namespace: ''
+    plugins:
+      cliconf:
+      - description: Use sonic cliconf to run command on Celestica SONiC devices.
+        name: sonic
+        namespace: ''
+    release_date: '2024-10-28'

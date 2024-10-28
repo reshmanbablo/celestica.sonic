@@ -1,0 +1,91 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # OSPFv4 interface config in Ethernet interface mode
+  eth-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST Ethernet $name
+    subcommand:
+      - ip=SKIP ospf=SKIP area $area
+      - ip=SKIP ospf=SKIP authentication=NAME:authentication&VALUE:true&NEGATE_CMD:SKIP message-digest=NAME:message-digest&VALUE:true&NEGATE_CMD:SKIP
+      - ip=SKIP ospf=SKIP authentication-key $authentication-key
+      - ip=SKIP ospf=SKIP bfd=NAME:bfd-enable&VALUE:true&NEGATE_CMD:ALLOW&IF_NEXT_VAL:1@EMPTY
+      - ip=SKIP ospf=SKIP bfd=SKIP&IF_NEXT_VAL:1@NOT_EMPTY profile $bfd-profile
+      - ip=SKIP ospf=SKIP cost $cost
+      - ip=SKIP ospf=SKIP dead-interval $dead-interval
+      - ip=SKIP ospf=SKIP dead-interval minimal hello-multiplier $hello-multiplier
+      - ip=SKIP ospf=SKIP hello-interval $hello-interval
+      - ip=LIST:message-digest-key&KEYS:$id ospf message-digest-key $id $algorithm $key
+      - ip=SKIP ospf=SKIP mtu-ignore=NAME:mtu-ignore&VALUE:true&NEGATE_CMD:ALLOW
+      - ip=SKIP ospf=SKIP network $network
+      - ip=SKIP ospf=SKIP passive=NAME:passive&VALUE:true&NEGATE_CMD:ALLOW
+      - ip=SKIP ospf=SKIP priority $priority
+      - ip=SKIP ospf=SKIP retransmit-interval $retransmit-interval
+      - ip=SKIP ospf=SKIP transmit-delay $transmit-delay
+
+  # OSPFv4 interface config in Ethernet interface mode
+  po-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST PortChannel $name
+    subcommand:
+      - ip=SKIP ospf=SKIP area $area
+      - ip=SKIP ospf=SKIP authentication=NAME:authentication&VALUE:true&NEGATE_CMD:SKIP message-digest=NAME:message-digest&VALUE:true&NEGATE_CMD:SKIP
+      - ip=SKIP ospf=SKIP authentication-key $authentication-key
+      - ip=SKIP ospf=SKIP bfd=NAME:bfd-enable&VALUE:true&NEGATE_CMD:ALLOW&IF_NEXT_VAL:1@EMPTY
+      - ip=SKIP ospf=SKIP bfd=SKIP&IF_NEXT_VAL:1@NOT_EMPTY profile $bfd-profile
+      - ip=SKIP ospf=SKIP cost $cost
+      - ip=SKIP ospf=SKIP dead-interval $dead-interval
+      - ip=SKIP ospf=SKIP dead-interval minimal hello-multiplier $hello-multiplier
+      - ip=SKIP ospf=SKIP hello-interval $hello-interval
+      - ip=LIST:message-digest-key&KEYS:$id ospf message-digest-key $id $algorithm $key
+      - ip=SKIP ospf=SKIP mtu-ignore=NAME:mtu-ignore&VALUE:true&NEGATE_CMD:ALLOW
+      - ip=SKIP ospf=SKIP network $network
+      - ip=SKIP ospf=SKIP passive=NAME:passive&VALUE:true&NEGATE_CMD:ALLOW
+      - ip=SKIP ospf=SKIP priority $priority
+      - ip=SKIP ospf=SKIP retransmit-interval $retransmit-interval
+      - ip=SKIP ospf=SKIP transmit-delay $transmit-delay
+
+  # OSPFv4 interface config in VLAN interface mode
+  vlan-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST Vlan $name
+    subcommand:
+      - ip=SKIP ospf=SKIP area $area
+      - ip=SKIP ospf=SKIP authentication=NAME:authentication&VALUE:true&NEGATE_CMD:SKIP message-digest=NAME:message-digest&VALUE:true&NEGATE_CMD:SKIP
+      - ip=SKIP ospf=SKIP authentication-key $authentication-key
+      - ip=SKIP ospf=SKIP bfd=NAME:bfd-enable&VALUE:true&NEGATE_CMD:ALLOW&IF_NEXT_VAL:1@EMPTY
+      - ip=SKIP ospf=SKIP bfd=SKIP&IF_NEXT_VAL:1@NOT_EMPTY profile $bfd-profile
+      - ip=SKIP ospf=SKIP cost $cost
+      - ip=SKIP ospf=SKIP dead-interval $dead-interval
+      - ip=SKIP ospf=SKIP dead-interval minimal hello-multiplier $hello-multiplier
+      - ip=SKIP ospf=SKIP hello-interval $hello-interval
+      - ip=LIST:message-digest-key&KEYS:$id ospf message-digest-key $id $algorithm $key
+      - ip=SKIP ospf=SKIP mtu-ignore=NAME:mtu-ignore&VALUE:true&NEGATE_CMD:ALLOW
+      - ip=SKIP ospf=SKIP network $network
+      - ip=SKIP ospf=SKIP passive=NAME:passive&VALUE:true&NEGATE_CMD:ALLOW
+      - ip=SKIP ospf=SKIP priority $priority
+      - ip=SKIP ospf=SKIP retransmit-interval $retransmit-interval
+      - ip=SKIP ospf=SKIP transmit-delay $transmit-delay
+
+  # OSPFv4 interface config in Loopback interface mode
+  lpbk-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST Loopback $name
+    subcommand:
+      - ip=SKIP ospf=SKIP area $area
+      - ip=SKIP ospf=SKIP authentication=NAME:authentication&VALUE:true&NEGATE_CMD:SKIP message-digest=NAME:message-digest&VALUE:true&NEGATE_CMD:SKIP
+      - ip=SKIP ospf=SKIP authentication-key $authentication-key
+      - ip=SKIP ospf=SKIP bfd=NAME:bfd-enable&VALUE:true&NEGATE_CMD:ALLOW&IF_NEXT_VAL:1@EMPTY
+      - ip=SKIP ospf=SKIP bfd=SKIP&IF_NEXT_VAL:1@NOT_EMPTY profile $bfd-profile
+      - ip=SKIP ospf=SKIP cost $cost
+      - ip=SKIP ospf=SKIP dead-interval $dead-interval
+      - ip=SKIP ospf=SKIP dead-interval minimal hello-multiplier $hello-multiplier
+      - ip=SKIP ospf=SKIP hello-interval $hello-interval
+      - ip=LIST:message-digest-key&KEYS:$id ospf message-digest-key $id $algorithm $key
+      - ip=SKIP ospf=SKIP mtu-ignore=NAME:mtu-ignore&VALUE:true&NEGATE_CMD:ALLOW
+      - ip=SKIP ospf=SKIP network $network
+      - ip=SKIP ospf=SKIP passive=NAME:passive&VALUE:true&NEGATE_CMD:ALLOW
+      - ip=SKIP ospf=SKIP priority $priority
+      - ip=SKIP ospf=SKIP retransmit-interval $retransmit-interval
+      - ip=SKIP ospf=SKIP transmit-delay $transmit-delay
+

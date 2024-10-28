@@ -1,0 +1,16 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # Vlan Interface config in config-if-view
+  vlan-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST&NEGATE_CMD:ALLOW Vlan $name
+    subcommand:
+      - description=IGN_VAL_FOR_DEL $description
+      - mtu=IGN_VAL_FOR_DEL $mtu
+      - shutdown=NAME:enabled&VALUE:false
+      - no=SKIP shutdown=NAME:enabled&VALUE:true
+

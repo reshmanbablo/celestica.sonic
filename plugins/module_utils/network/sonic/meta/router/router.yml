@@ -1,0 +1,19 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # Router config in mode
+  router-config:
+    subcommand:
+      - ip=NAME:ipv4 router-id $router-id
+      - ip=NAME:ipv4 nht=LIST:next-hop-track&KEYS:$protocol|$route-map $protocol route-map $route-map
+      - ip=NAME:ipv4 route=LIST:route&KEYS:$destination $destination $next-hop=LIST:next-hops&KEYS:$next-hop|$interface $interface=OPTIONAL&VALUE_CHECK_METHOD:interface tag $tag $distance=OPTIONAL&VALUE_CHECK_METHOD:integer onlink=NAME:onlink&VALUE:true&OPTIONAL
+      - ip=NAME:ipv4 protocol=LIST:protocol&KEYS:$name|$route-map $name route-map $route-map
+      - ipv6 router-id $router-id
+      - ipv6 nht=LIST:next-hop-track&KEYS:$protocol|$route-map $protocol route-map $route-map
+      - ipv6 route=LIST:route&KEYS:$destination $destination $next-hop=LIST:next-hops&KEYS:$next-hop|$interface $interface=OPTIONAL&VALUE_CHECK_METHOD:interface tag $tag $distance=OPTIONAL&VALUE_CHECK_METHOD:integer onlink=NAME:onlink&VALUE:true&OPTIONAL
+      - ipv6 protocol=LIST:protocol&KEYS:$name|$route-map $name route-map $route-map
+

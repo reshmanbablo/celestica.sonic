@@ -1,0 +1,44 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # Layer 3 interface config in Ethernet interface mode
+  eth-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST Ethernet $name
+    subcommand:
+      - ip=NAME:ipv4 address=LIST:addresses&KEYS:$address $address
+      - ipv6=NAME:ipv6 use-link-local-only=NAME:link-local-only&VALUE:true&NEGATE_CMD:ALLOW
+      - ipv6=NAME:ipv6 address=LIST:addresses&KEYS:$address $address
+
+  # Layer 3 interface config in Ethernet interface mode
+  po-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST PortChannel $name
+    subcommand:
+      - ip=NAME:ipv4 address=LIST:addresses&KEYS:$address $address
+      - ipv6=NAME:ipv6 use-link-local-only=NAME:link-local-only&VALUE:true&NEGATE_CMD:ALLOW
+      - ipv6=NAME:ipv6 address=LIST:addresses&KEYS:$address $address
+
+  # Layer 3 interface config in VLAN interface mode
+  vlan-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST Vlan $name
+    subcommand:
+      - ip=NAME:ipv4 address=LIST:addresses&KEYS:$address $address
+      - ipv6=NAME:ipv6 use-link-local-only=NAME:link-local-only&VALUE:true&NEGATE_CMD:ALLOW
+      - ipv6=NAME:ipv6 address=LIST:addresses&KEYS:$address $address
+
+  # Layer 3 interface config in Loopback interface mode
+  lpbk-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST Loopback $name
+    subcommand:
+      - ip=NAME:ipv4 address=LIST:addresses&KEYS:$address $address
+      - ipv6=NAME:ipv6 address=LIST:addresses&KEYS:$address $address
+
+  # Layer 3 interface config in Tunnel interface mode
+  tunnel-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST Tunnel $name
+    subcommand:
+      - ip=NAME:ipv4 address=LIST:addresses&KEYS:$address $address
+

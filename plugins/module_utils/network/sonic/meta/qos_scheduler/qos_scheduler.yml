@@ -1,0 +1,23 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # QoS scheduler config in qos-scheduler mode
+  qos-scheduler-config:
+    command: qos=LIST:scheduler-policy&KEYS:$name&NEGATE_CMD:ALLOW scheduler-policy $name
+    # QoS scheduler queue config in qos-scheduler-queue mode
+    qos-scheduler-queue-config:
+      command: queue=LIST:queue&KEYS:$id&NEGATE_CMD:ALLOW&EXIT_CMD:exit $id
+      subcommand:
+        - type=IGN_VAL_FOR_DEL $type
+        - weight=IGN_VAL_FOR_DEL $weight
+
+  # QoS scheduler config in ethernet interface mode
+  qos-scheduler-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST Ethernet $name
+    subcommand:
+      - scheduler-policy=IGN_VAL_FOR_DEL $scheduler-policy
+

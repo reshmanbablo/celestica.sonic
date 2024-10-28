@@ -1,0 +1,28 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # STP config in config mode
+  stp-global-config:
+    subcommand:
+      - stp=NAME:global protocol=IGN_VAL_FOR_DEL $protocol
+      - stp=NAME:global ageing-time=IGN_VAL_FOR_DEL $ageing-time
+      - stp=NAME:global fwd-delay=IGN_VAL_FOR_DEL $forward-delay
+      - stp=NAME:global hello-time=IGN_VAL_FOR_DEL $hello-time
+      - stp=NAME:global max-age=IGN_VAL_FOR_DEL $max-age
+      - stp=NAME:global max-hops=IGN_VAL_FOR_DEL $max-hops
+      - stp=NAME:global priority=IGN_VAL_FOR_DEL $priority
+
+  # STP config in ethernet interface mode
+  stp-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST Ethernet $name
+    subcommand:
+      - stp=SKIP enable=NAME:enable&VALUE:true&NEGATE_CMD:ALLOW
+      - stp=SKIP admin-edge=SKIP enable=NAME:admin-edge&VALUE:true&NEGATE_CMD:ALLOW
+      - stp=SKIP bpdu-guard=SKIP enable=NAME:bpdu-guard&VALUE:true&NEGATE_CMD:ALLOW
+      - stp=SKIP cost=IGN_VAL_FOR_DEL $cost
+      - stp=SKIP network-state=SKIP enable=NAME:network-state&VALUE:true&NEGATE_CMD:ALLOW
+      - stp=SKIP p2p=IGN_VAL_FOR_DEL $p2p

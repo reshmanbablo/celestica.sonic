@@ -1,0 +1,30 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # McLAG config in McLAG mode
+  mclag-domain-config:
+    command: mclag=LIST:domain&KEYS:$id domain $id
+    subcommand:
+      - keepalive=IGN_VAL_FOR_DEL $keep-alive
+      - peer-ip=IGN_VAL_FOR_DEL $peer-ip
+      - peer-link=INTERFACE_PARAM&IGN_VAL_FOR_DEL $peer-link
+      - session-timeout=IGN_VAL_FOR_DEL $session-timeout
+      - source-ip=IGN_VAL_FOR_DEL $source-ip
+      - system-mac=IGN_VAL_FOR_DEL $system-mac
+
+  # McLAG config in PortChannel interface mode
+  po-if-config:
+    command: interface=LIST:port-channel&KEYS:$name&INTERFACE_LIST PortChannel $name
+    subcommand:
+      - mclag=NAME:domain&IGN_VAL_FOR_DEL $domain
+
+  # McLAG config in VLAN interface mode
+  vlan-if-config:
+    command: interface=LIST:vlan&KEYS:$name&INTERFACE_LIST Vlan $name
+    subcommand:
+      - unique-ip=TRANSLATE_METHOD:bool_to_enable_disable $unique-ip
+

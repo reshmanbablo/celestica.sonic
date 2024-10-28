@@ -1,0 +1,18 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # SAG interface config in config mode
+  sag-config:
+    subcommand:
+      - sag=LIST:mac&KEYS:$address mac $address
+
+  # SAG interface config in VLAN interface mode
+  vlan-if-config:
+    command: interface=LIST:vlan&KEYS:$name&INTERFACE_LIST Vlan $name
+    subcommand:
+      - sag-ip=IGN_VAL_FOR_DEL $sag-ip
+

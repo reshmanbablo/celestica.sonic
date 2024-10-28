@@ -1,0 +1,41 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # BGP neighbor config in BGP router mode
+  bgp-router-config:
+    command: router=LIST:bgp&KEYS:$asn|$vrf|$view bgp $asn vrf $vrf view $view
+    subcommand:
+      - neighbor=LIST_GROUP:neighbor&KEYS:$id $id advertisement-interval $advertisement-interval
+      - neighbor=LIST_GROUP:neighbor&KEYS:$id $id capability dynamic=NAME:dynamic&VALUE:true&NEGATE_CMD:SKIP
+      # - neighbor=LIST_GROUP:neighbor&KEYS:$id $id capability extended-nexthop=NAME:extended-nexthop&VALUE:true&NEGATE_CMD:SKIP
+      - neighbor=LIST_GROUP:neighbor&KEYS:$id $id description $description
+      - neighbor=LIST_GROUP:neighbor&KEYS:$id $id disable-connected-check=NAME:disable-connected-check&VALUE:true&NEGATE_CMD:ALLOW
+      - neighbor=LIST_GROUP:neighbor&KEYS:$id $id dont-capability-negotiate=NAME:disable-capability-negotiate&VALUE:true&NEGATE_CMD:ALLOW
+      - neighbor=LIST_GROUP:neighbor&KEYS:$id $id enforce-first-as=NAME:enforce-first-as&VALUE:true&NEGATE_CMD:ALLOW
+      - neighbor=LIST_GROUP:neighbor&KEYS:$id $id enforce-multihop=NAME:enforce-multihop&VALUE:true&NEGATE_CMD:ALLOW
+      - neighbor=LIST_GROUP:neighbor&KEYS:$id $id graceful-restart=NAME:graceful-restart&VALUE:true&NEGATE_CMD:ALLOW
+      - neighbor=LIST_GROUP:neighbor&KEYS:$id $id graceful-restart-helper=NAME:graceful-restart-helper&VALUE:true&NEGATE_CMD:ALLOW
+      - neighbor=LIST_GROUP:neighbor&KEYS:$id $id local-as $local-as
+      - neighbor=LIST_GROUP:neighbor&KEYS:$id $id override-capability=NAME:override-capability&VALUE:true&NEGATE_CMD:ALLOW
+      - neighbor=LIST_GROUP:neighbor&KEYS:$id $id passive=NAME:passive&VALUE:true&NEGATE_CMD:ALLOW
+      - neighbor=LIST_GROUP:neighbor&KEYS:$id $id password $password
+      - neighbor=LIST_GROUP:neighbor&KEYS:$id $id port $port
+      - neighbor=LIST_GROUP:neighbor&KEYS:$id $id interface=NAME:interface&VALUE:true&NEGATE_CMD:SKIP v6only=NAME:v6only&VALUE:true&PARENT_NAME:interface&OPTIONAL&NEGATE_CMD:SKIP peer-group=PARENT_NAME:interface $peer-group
+      - neighbor=LIST_GROUP:neighbor&KEYS:$id $id interface=NAME:interface&VALUE:true remote-as=PARENT_NAME:interface $remote-as
+      - neighbor=LIST_GROUP:neighbor&KEYS:$id $id remote-as=IF_FACTS_PRESENT:!interface $remote-as
+      - neighbor=LIST_GROUP:neighbor&KEYS:$id $id peer-group=IF_FACTS_PRESENT:!interface&IF_NEXT_VAL:2@NOT_EMPTY $peer-group
+      - neighbor=LIST_GROUP:neighbor&KEYS:$id $id peer-group=NAME:peer-group-enable&VALUE:true&IF_NEXT_VAL:2@EMPTY&IF_FACTS_PRESENT:!interface&NEGATE_CMD:ALLOW
+      - neighbor=LIST_GROUP:neighbor&KEYS:$id $id sender-as-path-loop-detection=NAME:sender-as-path-loop-detection&VALUE:true&NEGATE_CMD:ALLOW
+      # - neighbor=LIST_GROUP:neighbor&KEYS:$id $id shutdown=NAME:shutdown&VALUE:true&NEGATE_CMD:ALLOW message=PARENT_NAME:shutdown $shutdown-message
+      # - neighbor=LIST_GROUP:neighbor&KEYS:$id $id shutdown=NAME:shutdown&VALUE:true&NEGATE_CMD:ALLOW rtt=PARENT_NAME:shutdown $shutdown-rtt
+      - neighbor=LIST_GROUP:neighbor&KEYS:$id $id solo=NAME:solo&VALUE:true&NEGATE_CMD:ALLOW
+      - neighbor=LIST_GROUP:neighbor&KEYS:$id $id strict-capability-match=NAME:strict-capability-match&VALUE:true&NEGATE_CMD:ALLOW
+      - neighbor=LIST_GROUP:neighbor&KEYS:$id $id timers=NAME:timers&NO_PARAM $keep-alive=VALUE_CHECK_METHOD:integer $hold
+      - neighbor=LIST_GROUP:neighbor&KEYS:$id $id timers connect $connect
+      - neighbor=LIST_GROUP:neighbor&KEYS:$id $id ttl-security hops $hops
+      - neighbor=LIST_GROUP:neighbor&KEYS:$id $id update-source $update-source
+

@@ -1,0 +1,52 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # BGP config in BGP router mode
+  bgp-router-config:
+    command: router=LIST:bgp&KEYS:$asn|$vrf|$view&NEGATE_CMD:ALLOW bgp $asn vrf $vrf view $view
+    subcommand:
+      - bgp=SKIP bestpath as-path confed=NAME:confed&VALUE:true&NEGATE_CMD:ALLOW
+      - bgp=SKIP bestpath as-path multipath-relax=NAME:multipath-relax&VALUE:true&NEGATE_CMD:SKIP as-set=NAME:multipath-relax-as-set&VALUE:true&OPTIONAL&PARENT_NAME:multipath-relax&NEGATE_CMD:SKIP
+      - bgp=SKIP bestpath bandwidth $bandwidth
+      - bgp=SKIP bestpath compare-routerid=NAME:compare-routerid&VALUE:true&NEGATE_CMD:ALLOW
+      - bgp=SKIP bestpath med confed=NAME:confed&VALUE:true&NEGATE_CMD:SKIP missing-as-worst=NAME:missing-as-worst&VALUE:true&OPTIONAL&PARENT_NAME:confed&NEGATE_CMD:SKIP
+      - bgp=SKIP bestpath peer-type=SKIP multipath-relax=NAME:peer-type-multipath-relax&VALUE:true&NEGATE_CMD:ALLOW
+      - bgp=SKIP always-compare-med=NAME:always-compare-med&VALUE:true&NEGATE_CMD:ALLOW
+      - no=SKIP bgp=SKIP client-to-client=SKIP reflection=NAME:client-to-client-reflection&VALUE:false&NEGATE_CMD:ALLOW
+      - bgp=SKIP cluster-id $cluster-id
+      - bgp=SKIP confederation identifier $identifier
+      # - bgp=SKIP confederation peers $peers
+      - no=SKIP bgp=SKIP default ipv4-unicast=NAME:ipv4-unicast&VALUE:false&NEGATE_CMD:ALLOW
+      - bgp=SKIP default local-preference $local-preference
+      - bgp=SKIP deterministic-med=NAME:deterministic-med&VALUE:true&NEGATE_CMD:ALLOW
+      - bgp=SKIP disable-ebgp-connected-route-check=NAME:disable-ebgp-connected-route-check&VALUE:true&NEGATE_CMD:ALLOW
+      - no=SKIP bgp=SKIP ebgp-requires-policy=NAME:ebgp-requires-policy&VALUE:false&NEGATE_CMD:ALLOW
+      - no=SKIP bgp=SKIP fast-external-failover=NAME:fast-external-failover&VALUE:false&NEGATE_CMD:ALLOW
+      - bgp=SKIP graceful-restart disable-eor=NAME:disable-eor&VALUE:true&NEGATE_CMD:ALLOW
+      - bgp=SKIP graceful-restart preserve-fw-state=NAME:preserve-fw-state&VALUE:true&NEGATE_CMD:ALLOW
+      - bgp=SKIP graceful-restart restart-time $restart-time
+      - bgp=SKIP graceful-restart rib-stale-time $rib-stale-time
+      - bgp=SKIP graceful-restart select-defer-time $select-defer-time
+      - bgp=SKIP graceful-restart stalepath-time $stalepath-time
+      - bgp=SKIP graceful-restart-disable=NAME:graceful-restart-disable&VALUE:true&NEGATE_CMD:ALLOW
+      - bgp=SKIP graceful-shutdown=NAME:graceful-shutdown&VALUE:true&NEGATE_CMD:ALLOW
+      - bgp=SKIP listen limit $limit
+      - bgp=SKIP listen range=LIST:range&KEYS:$address|$peer-group&NEGATE_CMD:ALLOW $address peer-group $peer-group
+      - bgp=SKIP log-neighbor-changes=NAME:log-neighbor-changes&VALUE:true&NEGATE_CMD:ALLOW
+      - bgp=SKIP max-med administrative=NAME:administrative&VALUE:true&NEGATE_CMD:SKIP $administrative-max=OPTIONAL
+      # - bgp=SKIP max-med on-startup $startup-period $startup-max=OPTIONAL
+      - no=SKIP bgp=SKIP network=SKIP import-check=NAME:network-import-check&VALUE:false&NEGATE_CMD:ALLOW
+      - bgp=SKIP reject-as-sets=NAME:reject-as-sets&VALUE:true&NEGATE_CMD:ALLOW
+      - bgp=SKIP route-map delay-timer $route-map-delay-timer
+      - bgp=SKIP route-reflector=SKIP allow-outbound-policy=NAME:router-reflector-allow-outbound-policy&VALUE:true&NEGATE_CMD:ALLOW
+      - bgp=SKIP router-id $router-id
+      - bgp=SKIP session-dscp=IGN_VAL_FOR_DEL $session-dscp
+      - bgp=SKIP shutdown=NAME:shutdown&VALUE:true&NEGATE_CMD:ALLOW message=OPTIONAL&PARENT_NAME:shutdown $shutdown-message
+      - coalesce-time $coalesce-time
+      # - timers bgp=SKIP $keep-alive $hold
+      - update-delay $update-delay-max-delay $update-delay-establish-wait
+

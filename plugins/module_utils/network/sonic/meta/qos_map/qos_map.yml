@@ -1,0 +1,61 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # QoS config in qos-dot1p-tc map mode
+  qos-map-dot1p-tc-config:
+    command: qos=LIST:dot1p-tc&KEYS:$name&NEGATE_CMD:ALLOW map dot1p-tc $name
+    subcommand:
+      - dot1p=LIST:dot1p&KEYS:$id $id traffic-class $traffic-class
+
+  # QoS config in qos-dscp-tc map mode
+  qos-map-dscp-tc-config:
+    command: qos=LIST:dscp-tc&KEYS:$name&NEGATE_CMD:ALLOW map dscp-tc $name
+    subcommand:
+      - dscp=LIST:dscp&KEYS:$id $id traffic-class $traffic-class
+
+  # QoS config in qos-pfc-priority-queue map mode
+  qos-map-pfc-priority-queue-config:
+    command: qos=LIST:pfc-priority-queue&KEYS:$name&NEGATE_CMD:ALLOW map pfc-priority-queue $name
+    subcommand:
+      - pfc-priority=LIST:pfc-priority&KEYS:$id $id queue $queue
+
+  # QoS config in qos-tc-dot1p map mode
+  qos-map-tc-dot1p-config:
+    command: qos=LIST:tc-dot1p&KEYS:$name&NEGATE_CMD:ALLOW map tc-dot1p $name
+    subcommand:
+      - traffic-class=LIST:traffic-class&KEYS:$id $id dot1p $dot1p
+
+  # QoS config in qos-tc-dscp map mode
+  qos-map-tc-dscp-config:
+    command: qos=LIST:tc-dscp&KEYS:$name&NEGATE_CMD:ALLOW map tc-dscp $name
+    subcommand:
+      - traffic-class=LIST:traffic-class&KEYS:$id $id dscp $dscp
+
+  # QoS config in qos-tc-pg map mode
+  qos-map-tc-pg-config:
+    command: qos=LIST:tc-priority-group&KEYS:$name&NEGATE_CMD:ALLOW map tc-pg $name
+    subcommand:
+      - traffic-class=LIST:traffic-class&KEYS:$id $id priority-group $priority-group
+
+  # QoS config in qos-tc-queue map mode
+  qos-map-tc-queue-config:
+    command: qos=LIST:tc-queue&KEYS:$name&NEGATE_CMD:ALLOW map tc-queue $name
+    subcommand:
+      - traffic-class=LIST:traffic-class&KEYS:$id $id queue $queue
+
+  # QoS map config in ethernet interface mode
+  qos-map-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST Ethernet $name
+    subcommand:
+      - qos-map=SKIP dot1p-tc=IGN_VAL_FOR_DEL $dot1p-tc
+      - qos-map=SKIP dscp-tc=IGN_VAL_FOR_DEL $dscp-tc
+      - qos-map=SKIP pfc-priority-queue=IGN_VAL_FOR_DEL $pfc-priority-queue
+      - qos-map=SKIP tc-dot1p=IGN_VAL_FOR_DEL $tc-dot1p
+      - qos-map=SKIP tc-dscp=IGN_VAL_FOR_DEL $tc-dscp
+      - qos-map=SKIP tc-pg=IGN_VAL_FOR_DEL $tc-priority-group
+      - qos-map=SKIP tc-queue=IGN_VAL_FOR_DEL $tc-queue
+

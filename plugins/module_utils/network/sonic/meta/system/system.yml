@@ -1,0 +1,14 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # System config in config-view
+  system-config:
+    subcommand:
+      - hostname=IGN_VAL_FOR_DEL $hostname
+      # - banner login=LIST:login&KEYS:$index
+      # - banner motd=LIST:motd&KEYS:$index
+

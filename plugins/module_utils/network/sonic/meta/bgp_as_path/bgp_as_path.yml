@@ -1,0 +1,11 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # BGP AS path config
+  as-path-config:
+    subcommand:
+      - bgp=LIST:as-path&KEYS:$name|$id as-path access-list $name seq=LIST:sequence-numbers&KEYS:$seq $seq $action $regexp

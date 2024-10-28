@@ -1,0 +1,20 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # QoS wred config in qos-wred mode
+  qos-wred-config:
+    command: qos=LIST:wred-profile&KEYS:$name&NEGATE_CMD:ALLOW wred-profile $name
+    subcommand:
+      - random-detect color=LIST:color&KEYS:$id $id min-threshold $min-threshold max-threshold $max-threshold drop-probability $drop-probability
+      - random-detect ecn=IGN_VAL_FOR_DEL $ecn
+
+  # QoS wred config in ethernet interface mode
+  qos-wred-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST Ethernet $name
+    subcommand:
+      - wred=LIST:profile&KEYS:$queue queue $queue profile=IGN_VAL_FOR_DEL $name
+

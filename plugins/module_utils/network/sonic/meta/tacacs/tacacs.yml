@@ -1,0 +1,15 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # TACACS config in config-view
+  tacacs-config:
+    subcommand:
+      - tacacs-server=NAME:global authtype=IGN_VAL_FOR_DEL $auth-type
+      - tacacs-server=NAME:global encrypted-passkey=IGN_VAL_FOR_DEL $encrypted-passkey
+      - tacacs-server=NAME:global retransmit=IGN_VAL_FOR_DEL $retransmit
+      - tacacs-server=NAME:global timeout=IGN_VAL_FOR_DEL $timeout
+      - tacacs-server=LIST:server&KEYS:$ip-addr host $ip-addr encrypted-passkey $encrypted-passkey port $port priority $priority timeout $timeout auth_type $auth-type vrf $vrf

@@ -1,0 +1,15 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # Edge security config in ethernet interface mode
+  edge-security-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST Ethernet $name
+    subcommand:
+      - edge-security=SKIP dynamic-learn-max=IGN_VAL_FOR_DEL $dynamic-learn-max
+      - edge-security=SKIP enable=NAME:enable&VALUE:true&NEGATE_CMD:ALLOW
+      - edge-security=SKIP sticky-mac $sticky-mac
+      - edge-security=SKIP violation-action=IGN_VAL_FOR_DEL $violation-action

@@ -1,0 +1,27 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # PoE config in config-view
+  poe-global-config:
+    subcommand:
+      - poe=NAME:global disable=NAME:disable&VALUE:true&NEGATE_CMD:ALLOW
+      - poe=NAME:global guard-band=IGN_VAL_FOR_DEL $guard-band
+      - poe=NAME:global power-management=IGN_VAL_FOR_DEL $power-management
+
+  # PoE config in ethernet interface mode
+  poe-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST Ethernet $name
+    subcommand:
+      - poe=SKIP detection-type=IGN_VAL_FOR_DEL $detection-type
+      - poe=SKIP enable=NAME:enable&VALUE:true&NEGATE_CMD:ALLOW
+      - poe=SKIP power-threshold=IGN_VAL_FOR_DEL $power-threshold $user-defined-threshold=OPTIONAL
+      - poe=SKIP power-up-mode=IGN_VAL_FOR_DEL $power-up-mode
+      - poe=SKIP power-up-mode=IGN_VAL_FOR_DEL $power-up-mode
+      - poe=SKIP power-via-mdi=SKIP enable=NAME:power-via-mdi&VALUE:true&NEGATE_CMD:ALLOW
+      - poe=SKIP priority=IGN_VAL_FOR_DEL $priority
+      - poe=SKIP reset=SKIP $reset-mode=IGN_VAL_FOR_DEL $auto-reset-timer=OPTIONAL
+

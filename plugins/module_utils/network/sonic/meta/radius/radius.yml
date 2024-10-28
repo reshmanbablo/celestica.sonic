@@ -1,0 +1,15 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # RADIUS config in config-view
+  radius-config:
+    subcommand:
+      - radius-server=NAME:global authtype=IGN_VAL_FOR_DEL $auth-type
+      - radius-server=NAME:global encrypted-passkey=IGN_VAL_FOR_DEL $encrypted-passkey
+      - radius-server=NAME:global retransmit=IGN_VAL_FOR_DEL $retransmit
+      - radius-server=NAME:global timeout=IGN_VAL_FOR_DEL $timeout
+      - radius-server=LIST:server&KEYS:$ip-addr host $ip-addr encrypted-passkey $encrypted-passkey auth-port $port priority $priority timeout $timeout retransmit $retransmit auth-type $auth-type vrf $vrf source-interface=INTERFACE_PARAM $source-interface

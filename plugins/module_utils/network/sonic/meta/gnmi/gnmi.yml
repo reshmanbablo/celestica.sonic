@@ -1,0 +1,33 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # gNMI config in telemetry mode
+  gnmi-config:
+    command: telemetry
+    subcommand:
+      - authentication=LIST:authentication&KEYS:$mode $mode
+      - ca-certificate=IGN_VAL_FOR_DEL file=SKIP $ca-certificate
+      - server certificate=IGN_VAL_FOR_DEL file=SKIP $certificate $key
+      - server port=IGN_VAL_FOR_DEL $port
+      - retry-interval=IGN_VAL_FOR_DEL $retry-interval
+
+    # Destination group config
+    destination-group-config:
+      command: destination-group=LIST:destination-group&KEYS:$name $name
+      subcommand:
+        - destination=LIST:destination&KEYS:$ip-addr|$port $ip-addr $port
+
+    # Subscription group config
+    subscription-group-config:
+      command: subscription-group=LIST:subscription-group&KEYS:$name $name 
+      subcommand:
+        - destination-group=IGN_VAL_FOR_DEL $destination-group
+        - report-interval=IGN_VAL_FOR_DEL $report-interval
+        - target $target
+        - type $report-type
+        - path=LIST:paths&KEYS:$path $path
+

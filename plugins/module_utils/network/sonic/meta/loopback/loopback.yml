@@ -1,0 +1,15 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # Loopback Interface config
+  lpbk-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST&NEGATE_CMD:ALLOW Loopback $name
+    subcommand:
+      - description=IGN_VAL_FOR_DEL $description
+      - shutdown=NAME:enabled&VALUE:false
+      - no=SKIP shutdown=NAME:enabled&VALUE:true
+

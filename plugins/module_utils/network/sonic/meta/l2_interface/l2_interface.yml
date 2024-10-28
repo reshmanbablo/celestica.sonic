@@ -1,0 +1,21 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # Layer 2 interface config in Ethernet interface mode
+  eth-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST Ethernet $name
+    subcommand:
+      - switchport=SKIP access vlan=IGN_VAL_FOR_DEL $vlan
+      - switchport=LIST:trunk&KEYS:$vlan trunk allowed vlan add=IGN_WORD_FOR_DEL $vlan
+
+  # Layer 2 interface config in PortChannel interface mode
+  po-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST PortChannel $name
+    subcommand:
+      - switchport=SKIP access vlan=IGN_VAL_FOR_DEL $vlan
+      - switchport=LIST:trunk&KEYS:$vlan trunk allowed vlan add=IGN_WORD_FOR_DEL $vlan
+

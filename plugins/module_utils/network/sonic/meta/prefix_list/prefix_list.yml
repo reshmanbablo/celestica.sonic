@@ -1,0 +1,15 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # Prefix list config in mode
+  prefix-list-config:
+    subcommand:
+      - ip=NAME:ipv4 prefix-list=SKIP sequence-number=SKIP description $description
+      - ip=NAME:ipv4 prefix-list=LIST:prefix-list&KEYS:$name $name seq=LIST:sequence-numbers&KEYS:$seq $seq $action $prefix ge $ge le $le
+      - ipv6 prefix-list=SKIP sequence-number=SKIP description $description
+      - ipv6 prefix-list=LIST:prefix-list&KEYS:$name $name seq=LIST:sequence-numbers&KEYS:$seq $seq $action $prefix ge $ge le $le
+

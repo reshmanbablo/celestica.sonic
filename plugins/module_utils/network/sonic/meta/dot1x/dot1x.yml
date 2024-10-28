@@ -1,0 +1,24 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # dot1x config in config-view
+  dot1x-global-config:
+    subcommand:
+      # - dot1x=SKIP radius server=LIST:server&KEYS:$type $type $ip-addr $port $encrypted-passkey $vrf=OPTIONAL encrypted=SKIP
+      - dot1x=SKIP radius vsa-vlan=LIST:vsa-vlan&KEYS:$vsa-description $vsa-description $vlan
+
+  # dot1x config in ethernet interface mode
+  dot1x-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST Ethernet $name
+    subcommand:
+      - dot1x=SKIP auth-mode=IGN_VAL_FOR_DEL $auth-mode
+      - dot1x=SKIP enable=NAME:enable&VALUE:true&NEGATE_CMD:ALLOW
+      - dot1x=SKIP mab=SKIP backoff-timer=IGN_VAL_FOR_DEL $mab-backoff-timer
+      - dot1x=SKIP mab=SKIP enable=NAME:mab-enable&VALUE:true&NEGATE_CMD:ALLOW
+      - dot1x=SKIP max-clients=IGN_VAL_FOR_DEL $max-clients
+      - dot1x=SKIP reauth-timer=IGN_VAL_FOR_DEL $reauth-timer
+

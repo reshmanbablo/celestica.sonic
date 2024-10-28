@@ -1,0 +1,13 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # Mirror session config in config-view
+  mirror-session-config:
+    command: mirror-session=LIST:session&KEYS:$name&NEGATE_CMD:ALLOW $name
+    subcommand:
+      - erspan dst-ip $destination-address src-ip $source-address dscp=OPTIONAL $dscp ttl=OPTIONAL $ttl gre=OPTIONAL $gre source=INTERFACE_PARAM&OPTIONAL $source-interface direction=OPTIONAL $direction
+      - span=LIST:span&KEYS:$destination-interface|$source-interface destination $destination-interface=INTERFACE_PARAM source=INTERFACE_PARAM $source-interface direction $direction

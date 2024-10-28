@@ -1,0 +1,16 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # Tunnel Interface config
+  tunnel-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST&NEGATE_CMD:ALLOW Tunnel $name
+    subcommand:
+      - destination-ip=IGN_VAL_FOR_DEL $destination-ip
+      - source-ip=IGN_VAL_FOR_DEL $source-ip
+      - shutdown=NAME:admin-status&VALUE:down
+      - no=SKIP shutdown=NAME:admin-status&VALUE:up
+

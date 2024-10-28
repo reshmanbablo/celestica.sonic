@@ -1,0 +1,45 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # VRF config in VRF mode
+  vrf-config:
+    command: vrf=LIST:vrf&KEYS:$name&NEGATE_CMD:ALLOW $name
+    subcommand:
+      - ip=SKIP router-id=NAME:ipv4-router-id $ipv4-router-id
+      # - ipv6=SKIP router-id=NAME:ipv6-router-id $ipv6-router-id
+      - vni $vni
+
+  # VRF interface config in Ethernet interface mode
+  eth-if-vrf-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST Ethernet $name
+    subcommand:
+      - vrf=IGN_VAL_FOR_DEL $vrf
+
+  # VRF interface config in PortChannel interface mode
+  po-if-vrf-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST PortChannel $name
+    subcommand:
+      - vrf=IGN_VAL_FOR_DEL $vrf
+
+  # VRF interface config in VLAN interface mode
+  vlan-if-vrf-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST Vlan $name
+    subcommand:
+      - vrf=IGN_VAL_FOR_DEL $vrf
+
+  # VRF interface config in Loopback interface mode
+  lpbk-if-vrf-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST Loopback $name
+    subcommand:
+      - vrf=IGN_VAL_FOR_DEL $vrf
+
+  # VRF interface config in Management interface mode
+  mgmt-if-vrf-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST Management $name
+    subcommand:
+      - vrf=IGN_VAL_FOR_DEL $vrf
+

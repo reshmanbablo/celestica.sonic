@@ -1,0 +1,19 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # AAA config in config-view
+  aaa-config:
+    subcommand:
+      # - aaa=SKIP accounting tacacs+=NAME:tacacs+&VALUE:true&PARENT_NAME:accounting&OPTIONAL local=NAME:local&PARENT_NAME:accounting&VALUE:true&OPTIONAL
+      - aaa=SKIP authentication failthrough=TRANSLATE_METHOD:bool_to_enable_disable&IGN_VAL_FOR_DEL $failthrough
+      # - aaa=SKIP authentication login tacacs+=NAME:tacacs+&VALUE:true&OPTIONAL radius=NAME:radius&VALUE:true&OPTIONAL local=NAME:local&VALUE:true&OPTIONAL
+      # - aaa=SKIP authorization tacacs+=NAME:tacacs+&VALUE:true&OPTIONAL local=NAME:local&VALUE:true&OPTIONAL
+
+  # User config in config-view
+  user-config:
+    subcommand:
+      - user=LIST:user&KEYS:$name|$hash-password&NEGATE_CMD:ALLOW $name hashed-password=IGN_VAL_FOR_DEL $hash-password

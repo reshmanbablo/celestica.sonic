@@ -1,0 +1,23 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # LLDP config in config-view
+  lldp-global-config:
+    subcommand:
+      - lldp=NAME:global enable=NAME:enable&VALUE:true&NEGATE_CMD:ALLOW
+      - lldp=NAME:global system-description=IGN_VAL_FOR_DEL $system-description
+      - lldp=NAME:global system-name=IGN_VAL_FOR_DEL $system-name
+      - lldp=NAME:global timer=IGN_VAL_FOR_DEL $hello-interval
+      - no=SKIP lldp=NAME:global tlv-select management-address=NAME:management-address&VALUE:false&NEGATE_CMD:ALLOW
+      - no=SKIP lldp=NAME:global tlv-select system-capabilities=NAME:system-capabilities&VALUE:false&NEGATE_CMD:ALLOW
+
+  # LLDP config in ethernet interface mode
+  lldp-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST Ethernet $name
+    subcommand:
+      - no=SKIP lldp=SKIP enable=NAME:enable&VALUE:false&NEGATE_CMD:ALLOW
+      # - lldp=SKIP med network-policy application $application vlan-id=OPTIONAL $vlan tagged=NAME:tagged&VALUE:true&OPTIONAL dscp=OPTIONAL $dscp priority=OPTIONAL $priority

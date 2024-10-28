@@ -1,0 +1,18 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # PortChannel Interface config in config-if-view
+  po-if-config:
+    # TODO: Revisit the command syntax
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST&NEGATE_CMD:ALLOW PortChannel $name min-links $min-links fallback=NAME:lacp-fallback&VALUE:true static=NAME:static-lag&VALUE:true fast-lag=NAME:fast-lag&VALUE:true
+    subcommand:
+      - description=IGN_VAL_FOR_DEL $description
+      - mtu=IGN_VAL_FOR_DEL $mtu
+      - tpid=IGN_VAL_FOR_DEL $tpid
+      - shutdown=NAME:enabled&VALUE:false
+      - no=SKIP shutdown=NAME:enabled&VALUE:true
+

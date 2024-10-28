@@ -1,0 +1,21 @@
+---
+# Command modes
+command_modes:
+  - sonic_cli
+
+# sonic-cli translation
+sonic_cli:
+  # QoS buffer config in config-view
+  qos-buffer-config:
+    subcommand:
+      - qos=SKIP buffer-mgmt=SKIP enable=NAME:buffer-mgmt&VALUE:true&NEGATE_CMD:ALLOW
+      - qos=LIST:buffer-profile-egress&KEYS:$name buffer-profile egress profile-name $name buffer-pool $buffer-pool dynamic-threshold $dynamic-threshold static-threshold $static-threshold size $size
+      - qos=LIST:buffer-profile-ingress&KEYS:$name buffer-profile ingress profile-name $name buffer-pool $buffer-pool dynamic-threshold $dynamic-threshold static-threshold $static-threshold headroom $headroom size $size xon $xon
+
+  # QoS buffer config in ethernet interface mode
+  qos-buffer-if-config:
+    command: interface=LIST:interface&KEYS:$name&INTERFACE_LIST Ethernet $name
+    subcommand:
+      - buffer-pg-profile=LIST:priority-group-profile&KEYS:$name|$group name $name priority-group $group
+      - buffer-queue-profile=LIST:buffer-queue-profile&KEYS:$name|$queue name $name queue-id $queue
+      - priority-flow-control=LIST:priority-flow-control&KEYS:$mode|$group mode $mode $group
