@@ -13,7 +13,7 @@ The Celestica SONiC collection supports ``network_cli`` connection.
 ### Cliconf plugins
 | Name | Description |
 | --- | --- |
-| [network_cli](https://github.com/ansible-collections/celestica.sonic)|Use cliconf to run command on Celestica SONiC platform |
+| [network_cli](https://github.com/celestica/celestica.sonic)|Use cliconf to run command on Celestica SONiC platform |
 
 ### Collection core modules
 | Name | Description | Connection type |
@@ -77,7 +77,7 @@ The playbooks directory includes the below sample playbooks for end-to-end use c
 
 | Name | Description |
 | --- | --- |
-| [**Layer 3 fabric**](https://github.com/ansible-collections/celestica.sonic/blob/main/playbooks/l3_fabric/README.md)|Sample playbook to build a Layer 3 leaf-spine fabric |
+| [**Layer 3 fabric**](https://github.com/celestica/celestica.sonic/blob/main/playbooks/l3_fabric/README.md)|Sample playbook to build a Layer 3 leaf-spine fabric |
 <!--end collection content-->
 
 ## Installing this collection
@@ -227,7 +227,7 @@ This collection follows the Ansible project's
 <!--Add a link to a changelog.md file or an external docsite to cover this information. -->
 ## Release notes
 
-Release notes are available [here](https://github.com/ansible-collections/celestica.sonic/blob/main/CHANGELOG.rst).
+Release notes are available [here](https://github.com/celestica/celestica.sonic/blob/main/CHANGELOG.rst).
 
 ## Roadmap
 
